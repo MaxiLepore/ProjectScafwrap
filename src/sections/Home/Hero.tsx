@@ -23,7 +23,22 @@ const slides = [
     buttonText: "MORE INFO",
     buttonLink: "construction",
   },
-  // Puedes agregar más slides aquí
+  {
+    image: "/images/reclads.jpg",
+    title: "Shrink Wrap for Reclads",
+    description:
+      "Scafwrap provide a unique, full encapsulation shrink wrap solution for weatherproofing leaky homes and all types of building reclads",
+    buttonText: "MORE INFO",
+    buttonLink: "reclads",
+  },
+  {
+    image: "/images/recycling.jpg",
+    title: "Shrink Wrap for Recycling",
+    description:
+      "Scafwrap actively work with a local recycling facility in Auckland to recycle our Shrinkwrap",
+    buttonText: "MORE INFO",
+    buttonLink: "Recycling",
+  },
 ];
 
 export default function Hero() {
@@ -38,7 +53,7 @@ export default function Hero() {
         speed={700}
         className="h-full"
       >
-        {slides.map((slide, index) => ( 
+        {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-[80vh] sm:h-[60vh] lg:h-[70vh] transition-transform duration-700 will-change-transform">
               {/* Imagen de fondo */}
@@ -55,7 +70,7 @@ export default function Hero() {
                 {/* Triángulos principales */}
                 <div className="absolute left-0 top-0 w-40 h-40 bg-gradient-to-br from-cyan-400/80 to-cyan-500/60 clip-top-left-triangle transition-all duration-700" />
                 <div className="absolute right-0 bottom-0 w-40 h-40 bg-gradient-to-tl from-cyan-400/80 to-cyan-500/60 clip-bottom-right-triangle transition-all duration-700" />
-                
+
                 {/* Triángulos adicionales más pequeños para efecto layered */}
                 <div className="absolute left-8 top-8 w-20 h-20 bg-gradient-to-br from-white/20 to-cyan-300/40 clip-top-left-triangle transition-all duration-500 delay-100" />
                 <div className="absolute right-8 bottom-8 w-20 h-20 bg-gradient-to-tl from-white/20 to-cyan-300/40 clip-bottom-right-triangle transition-all duration-500 delay-100" />
@@ -66,10 +81,10 @@ export default function Hero() {
 
               {/* Contenido responsive mejorado */}
               <div className="absolute bottom-10 sm:bottom-8 lg:bottom-32 left-4 sm:left-6 lg:right-50 lg:left-auto flex flex-col items-start lg:items-end justify-end z-20 p-4 sm:p-6 lg:p-8 w-full max-w-full sm:max-w-2xl lg:max-w-5xl">
-                <h1 className="font-heading font-bold uppercase text-white drop-shadow-lg text-left lg:text-right text-[24px] sm:text-[32px] lg:text-[50px] leading-tight">
+                <h1 className="font-heading font-bold uppercase text-white drop-shadow-lg text-left lg:text-right text-[23px] sm:text-[32px] lg:text-[50px] leading-tight">
                   {slide.title}
                 </h1>
-                <p className="mt-2 sm:mt-3 lg:mt-4 font-body text-white drop-shadow-md text-left lg:text-right max-w-full sm:max-w-lg lg:max-w-2xl text-[12px] sm:text-[13px] lg:text-[16px] leading-relaxed">
+                <p className="mt-2 pr-10 lg:pr-0 sm:mt-3 lg:mt-4 font-body text-white drop-shadow-md text-left lg:text-right max-w-full sm:max-w-sm lg:max-w-2xl text-[12px] sm:text-[13px] lg:text-[16px] leading-relaxed">
                   {slide.description}
                 </p>
                 <a

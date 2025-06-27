@@ -1,45 +1,45 @@
-// src/sections/Construction/Banner.tsx
+// src/sections/Recycling/Banner.tsx
 import Image from "next/image";
-import ConstructionInfo from "./ConstructionInfo";
+import RecyclingInfo from "./RecyclingInfo";
 
 export default function Banner() {
-  // Imágenes para la galería de construcción
-  const constructionImages = [
+  // Imágenes simples para la galería
+  const recyclingImages = [
+    {
+      src: "/images/recycling.jpg",
+      alt: "Recycling facility processing shrink wrap"
+    },
     {
       src: "/images/construction.jpg",
-      alt: "Industrial building shrink wrap"
+      alt: "Sustainable construction practices"
+    },
+    {
+      src: "/images/recycling.jpg",
+      alt: "Environmental waste management"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Construction site weather protection"
+      alt: "Marine recycling services"
+    },
+    {
+      src: "/images/recycling.jpg",
+      alt: "Circular economy solutions"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Scaffolding enclosure system"
+      alt: "Green building practices"
+    },
+    {
+      src: "/images/recycling.jpg",
+      alt: "Sustainable shrink wrap disposal"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Building renovation cover"
+      alt: "Eco-friendly marine solutions"
     },
     {
-      src: "/images/construction.jpg",
-      alt: "Construction dust containment"
-    },
-    {
-      src: "/images/marine.jpg",
-      alt: "Temporary building protection"
-    },
-    {
-      src: "/images/construction.jpg",
-      alt: "Site weather barrier"
-    },
-    {
-      src: "/images/marine.jpg",
-      alt: "Industrial wrapping solutions"
-    },
-    {
-      src: "/images/construction.jpg",
-      alt: "Construction environmental control"
+      src: "/images/recycling.jpg",
+      alt: "Environmental compliance services"
     }
   ];
 
@@ -48,17 +48,17 @@ export default function Banner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título principal */}
         <h1 className="text-4xl md:text-7xl font-bold text-gray-800 font-heading mb-10 tracking-wide">
-          CONSTRUCTION
+          RECYCLING
         </h1>
         
         {/* Contenido descriptivo */}
         <div className="mb-16">
-          <ConstructionInfo />
+          <RecyclingInfo />
         </div>
         
         {/* Galería de imágenes simple */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {constructionImages.map((image, index) => (
+          {recyclingImages.map((image, index) => (
             <div 
               key={index}
               className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"

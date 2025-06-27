@@ -44,10 +44,10 @@ export default function Banner() {
   ];
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título principal */}
-        <h1 className="text-6xl md:text-7xl font-bold text-gray-800 font-heading mb-16 tracking-wide">
+        <h1 className="text-4xl md:text-7xl font-bold text-gray-800 font-heading mb-10 tracking-wide">
           MARINE
         </h1>
         

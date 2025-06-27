@@ -1,45 +1,45 @@
-// src/sections/Construction/Banner.tsx
+// src/sections/Reclads/Banner.tsx
 import Image from "next/image";
-import ConstructionInfo from "./ConstructionInfo";
+import RecladInfo from "./RecladInfo";
 
 export default function Banner() {
-  // Imágenes para la galería de construcción
-  const constructionImages = [
+  // Imágenes para la galería de reclads
+  const recladImages = [
     {
       src: "/images/construction.jpg",
-      alt: "Industrial building shrink wrap"
+      alt: "Reclad project - building facade renovation"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Construction site weather protection"
+      alt: "Commercial building reclad services"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Scaffolding enclosure system"
+      alt: "Weathertightness reclad solutions"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Building renovation cover"
+      alt: "Building envelope upgrade"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Construction dust containment"
+      alt: "Reclad installation process"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Temporary building protection"
+      alt: "Modern building reclad finish"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Site weather barrier"
+      alt: "Professional reclad services"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Industrial wrapping solutions"
+      alt: "Building weatherproofing"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Construction environmental control"
+      alt: "Quality reclad solutions"
     }
   ];
 
@@ -48,20 +48,20 @@ export default function Banner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título principal */}
         <h1 className="text-4xl md:text-7xl font-bold text-gray-800 font-heading mb-10 tracking-wide">
-          CONSTRUCTION
+          RECLADS
         </h1>
         
         {/* Contenido descriptivo */}
         <div className="mb-16">
-          <ConstructionInfo />
+          <RecladInfo />
         </div>
         
         {/* Galería de imágenes simple */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {constructionImages.map((image, index) => (
+          {recladImages.map((image, index) => (
             <div 
               key={index}
-              className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="relative overflow-hidden rounded-lg shadow-md"
             >
               <div className="relative h-64">
                 <Image
