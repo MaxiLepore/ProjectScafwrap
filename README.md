@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ScafWrap – Landing Page
 
-## Getting Started
+Landing page profesional desarrollada para **ScafWrap**, una empresa de Nueva Zelanda especializada en soluciones de **encapsulado con shrink wrap para entornos marinos, construcción y reciclaje**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧭 Objetivo del Proyecto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El objetivo de esta landing es ofrecer una **presencia digital moderna, profesional y responsiva** para ScafWrap, resaltando sus servicios principales, generando confianza en clientes potenciales y facilitando el contacto desde cualquier dispositivo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Tecnologías Utilizadas
 
-## Learn More
+| Tecnología     | Descripción |
+|----------------|-------------|
+| **Next.js**    | Framework React para renderizado híbrido (SSR + SSG) |
+| **React**      | Librería base para interfaces de usuario |
+| **Tailwind CSS** | Utilidad CSS para diseño rápido y responsive |
+| **TypeScript** | Tipado estático para mayor robustez |
+| **Google Fonts** | Tipografías personalizadas (`Montserrat` para títulos, `Istok Web` para cuerpo) |
+| **Git & GitHub** | Control de versiones y colaboración |
+| **Vercel (opcional)** | Hosting ideal para proyectos Next.js |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 ¿Por qué elegimos Next.js?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ✅ **Renderizado híbrido (SSR + SSG)**: ideal para velocidad, SEO y flexibilidad.
+- ✅ **Arquitectura escalable**: permite agregar rutas adicionales como `/marine`, `/construction`, etc.
+- ✅ **Enrutamiento simple y basado en archivos**.
+- ✅ **Integración perfecta con Vercel** para deploy y CI/CD automáticos.
+- ✅ **Soporte oficial para TypeScript y optimización automática**.
 
-## Deploy on Vercel
+Next.js es el mejor framework React actual para construir sitios rápidos, escalables y bien indexados en buscadores, lo cual es clave para el alcance de ScafWrap.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🖼️ Estructura del Proyecto
+

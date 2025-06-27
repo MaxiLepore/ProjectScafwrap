@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-    --primary: "#00AEEF";   
-    --secondary: "#008CD2";  
-    --textDark: "#1E1E1E";  
-    --grayText: "#666666"; 
+    --color-primary: #00AEEF;   
+    --color-secondary: #008CD2;  
+    --color-textDark: #1E1E1E;  
+    --color-grayText: #666666; 
 
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Istok Web', sans-serif;
