@@ -1,6 +1,7 @@
 // src/sections/Contact/ContactPage.tsx
 "use client"
 import { useState } from "react"
+import emailjs from '@emailjs/browser';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ export default function ContactPage() {
     subject: "",
     message: ""
   })
+  const [status, setStatus] = useState<null | 'success' | 'error'>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -20,10 +23,39 @@ export default function ContactPage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Aquí se implementaría la lógica para enviar el formulario
-    console.log("Formulario enviado:", formData)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+    try {
+      await emailjs.send(
+        'service_oqpns6j',
+        'template_1gjgcjg',
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          title: formData.subject,
+          message: formData.message
+        },
+        '8lC1Nuqb1a81sM6oF'
+      );
+      setStatus('success');
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error) {
+      setStatus('error');
+      console.error('Error de EmailJS:', error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -199,9 +231,16 @@ export default function ContactPage() {
               <button
                 type="submit"
                 className="w-full bg-[#36c6f4] hover:bg-[#2bb4e0] text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200"
+                disabled={loading}
               >
-                Send Message
+                {loading ? 'Enviando...' : 'Send Message'}
               </button>
+              {status === 'success' && (
+                <p className="text-green-600 text-center font-semibold mt-2">Message sent successfully!</p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-600 text-center font-semibold mt-2">Hubo un error al enviar el mensaje. Intenta nuevamente.</p>
+              )}
             </form>
           </div>
         </div>
