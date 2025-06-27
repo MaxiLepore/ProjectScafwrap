@@ -1,35 +1,34 @@
 // src/sections/Marine/MarineInfo.tsx
 export default function MarineInfo() {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-primary mb-8 text-center">
-          What We Do in Marine
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-6 bg-gray-50 rounded shadow">
-            <h3 className="text-xl font-semibold text-primary mb-2">Logistics</h3>
-            <p className="text-gray-700">
-              Efficient coastal and international shipping coordination, port services and vessel handling.
+    <section className="py-0 bg-white">
+      <div className="max-w-6xl">
+        {/* Contenido en dos columnas */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Columna izquierda */}
+          <div>
+            <p className="text-gray-700 text-lg leading-relaxed font-light">
+              <span className="font-semibold text-gray-800">Scaf Wrap</span> are Auckland&apos;s leading marine shrink wrap specialists, providing weather proofing 
+              solutions during marine refits of boats and yachts. Scafwrap work closely with yacht 
+              captains and local shipyards, supplying shrink wrap systems for vessels of any size. We can 
+              cover just a particular area or the entire yacht or boat as required.
             </p>
           </div>
-
-          <div className="p-6 bg-gray-50 rounded shadow">
-            <h3 className="text-xl font-semibold text-primary mb-2">Sustainability</h3>
-            <p className="text-gray-700">
-              Eco-friendly operations that reduce emissions and preserve marine biodiversity.
+          
+          {/* Columna derecha */}
+          <div className="space-y-6">
+            <p className="text-gray-700 text-lg leading-relaxed font-light">
+              As well as weatherproofing the yacht or boat itself, we also shrink wrap structures for boat 
+              building and repair and have created contained facilities making it possible for the marine 
+              industry to undertake multiple international super yacht refits.
             </p>
-          </div>
-
-          <div className="p-6 bg-gray-50 rounded shadow">
-            <h3 className="text-xl font-semibold text-primary mb-2">Consulting</h3>
-            <p className="text-gray-700">
-              Strategic advice for marine infrastructure development and environmental compliance.
+            <p className="text-gray-700 text-lg leading-relaxed font-light">
+              Scafwrap also provide protective coverings for marine applications during transport or 
+              storage.
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

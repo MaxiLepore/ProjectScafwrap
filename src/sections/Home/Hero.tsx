@@ -50,21 +50,26 @@ export default function Hero() {
                 priority
               />
 
-              {/* Overlays azules pequeños en cada esquina - Solo en dispositivos grandes */}
+              {/* Overlays celestes modernos en cada esquina - Mejorado pero similar */}
               <div className="absolute inset-0 pointer-events-none z-10 hidden lg:block">
-                <div className="absolute left-0 top-0 w-46 h-46 bg-primary/90 clip-top-left-triangle transition-opacity duration-500" />
-                <div className="absolute right-0 bottom-0 w-46 h-46 bg-primary/90 clip-bottom-right-triangle transition-opacity duration-500" />
+                {/* Triángulos principales */}
+                <div className="absolute left-0 top-0 w-40 h-40 bg-gradient-to-br from-cyan-400/80 to-cyan-500/60 clip-top-left-triangle transition-all duration-700" />
+                <div className="absolute right-0 bottom-0 w-40 h-40 bg-gradient-to-tl from-cyan-400/80 to-cyan-500/60 clip-bottom-right-triangle transition-all duration-700" />
+                
+                {/* Triángulos adicionales más pequeños para efecto layered */}
+                <div className="absolute left-8 top-8 w-20 h-20 bg-gradient-to-br from-white/20 to-cyan-300/40 clip-top-left-triangle transition-all duration-500 delay-100" />
+                <div className="absolute right-8 bottom-8 w-20 h-20 bg-gradient-to-tl from-white/20 to-cyan-300/40 clip-bottom-right-triangle transition-all duration-500 delay-100" />
               </div>
 
-              {/* Overlay oscuro para mejorar contraste */}
+              {/* Overlay oscuro mejorado */}
               <div className="absolute inset-0 bg-black/40 sm:bg-black/35 lg:bg-black/30 z-10 transition-opacity duration-700" />
 
-              {/* Contenido responsive */}
-              <div className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-4 sm:left-6 lg:right-25 lg:left-auto flex flex-col items-start lg:items-end justify-end z-20 p-4 sm:p-6 lg:p-8 w-full max-w-full sm:max-w-2xl lg:max-w-4xl">
-                <h1 className="font-heading font-bold uppercase text-white drop-shadow-lg text-left lg:text-right text-[24px] sm:text-[32px] lg:text-[40px] leading-tight">
+              {/* Contenido responsive mejorado */}
+              <div className="absolute bottom-10 sm:bottom-8 lg:bottom-32 left-4 sm:left-6 lg:right-50 lg:left-auto flex flex-col items-start lg:items-end justify-end z-20 p-4 sm:p-6 lg:p-8 w-full max-w-full sm:max-w-2xl lg:max-w-5xl">
+                <h1 className="font-heading font-bold uppercase text-white drop-shadow-lg text-left lg:text-right text-[24px] sm:text-[32px] lg:text-[50px] leading-tight">
                   {slide.title}
                 </h1>
-                <p className="mt-2 sm:mt-3 lg:mt-4 font-body text-white drop-shadow-md text-left lg:text-right max-w-full sm:max-w-lg lg:max-w-md text-[12px] sm:text-[13px] lg:text-[14px] leading-relaxed">
+                <p className="mt-2 sm:mt-3 lg:mt-4 font-body text-white drop-shadow-md text-left lg:text-right max-w-full sm:max-w-lg lg:max-w-2xl text-[12px] sm:text-[13px] lg:text-[16px] leading-relaxed">
                   {slide.description}
                 </p>
                 <a
@@ -78,43 +83,66 @@ export default function Hero() {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* Custom CSS para los triángulos azules pequeños y bullets azules */}
+      {/* Custom CSS para los triángulos celestes modernos y bullets mejorados */}
       <style jsx global>{`
         .clip-top-left-triangle {
           clip-path: polygon(0 0, 100% 0, 0 100%);
+          filter: drop-shadow(0 4px 8px rgba(34, 211, 238, 0.3));
         }
         .clip-bottom-right-triangle {
           clip-path: polygon(100% 100%, 100% 0, 0 100%);
+          filter: drop-shadow(0 -4px 8px rgba(34, 211, 238, 0.3));
         }
-        /* Swiper bullets personalizados en azul */
+        /* Swiper bullets mejorados - mantiene simpleza anterior */
         .swiper-pagination-bullet {
-          background: #2563eb !important;
-          opacity: 0.5;
-          transition: box-shadow 0.3s, opacity 0.3s;
+          background: rgba(255, 255, 255, 0.8) !important;
+          opacity: 1 !important;
+          width: 8px !important;
+          height: 8px !important;
+          border: 1px solid rgba(255, 255, 255, 0.6) !important;
+          transition: all 0.3s ease !important;
+          cursor: pointer !important;
+        }
+        .swiper-pagination-bullet:hover {
+          background: rgba(255, 255, 255, 1) !important;
+          border-color: rgba(255, 255, 255, 0.9) !important;
+          transform: scale(1.1) !important;
         }
         .swiper-pagination-bullet-active {
-          opacity: 1;
-          box-shadow: 0 0 0 4px #2563eb44;
+          background: #22d3ee !important;
+          border-color: #22d3ee !important;
+          box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3) !important;
+          transform: scale(1.3) !important;
         }
         .swiper-pagination {
           position: absolute !important;
-          bottom: 16px !important;
-          left: 0;
-          right: 0;
+          bottom: 20px !important;
+          left: 0 !important;
+          right: 0 !important;
           z-index: 30 !important;
-          display: flex;
-          justify-content: center;
-          gap: 6px;
+          display: flex !important;
+          justify-content: center !important;
+          gap: 8px !important;
+          padding: 10px !important;
         }
         @media (min-width: 640px) {
           .swiper-pagination {
-            bottom: 20px !important;
-            gap: 8px;
+            bottom: 24px !important;
+            gap: 10px !important;
+          }
+          .swiper-pagination-bullet {
+            width: 10px !important;
+            height: 10px !important;
           }
         }
         @media (min-width: 1024px) {
           .swiper-pagination {
-            bottom: 24px !important;
+            bottom: 30px !important;
+            gap: 12px !important;
+          }
+          .swiper-pagination-bullet {
+            width: 12px !important;
+            height: 12px !important;
           }
         }
       `}</style>

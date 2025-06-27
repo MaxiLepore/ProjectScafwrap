@@ -1,45 +1,45 @@
-// src/sections/Marine/Banner.tsx
+// src/sections/Construction/Banner.tsx
 import Image from "next/image";
-import MarineInfo from "./MarineInfo";
+import ConstructionInfo from "./ConstructionInfo";
 
 export default function Banner() {
-  // Imágenes simples para la galería
-  const marineImages = [
+  // Imágenes para la galería de construcción
+  const constructionImages = [
+    {
+      src: "/images/construction.jpg",
+      alt: "Industrial building shrink wrap"
+    },
     {
       src: "/images/marine.jpg",
-      alt: "Yacht shrink wrapping service"
+      alt: "Construction site weather protection"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Boat covered with shrink wrap"
+      alt: "Scaffolding enclosure system"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Marine facility wrapping"
+      alt: "Building renovation cover"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Super yacht maintenance"
+      alt: "Construction dust containment"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Boat transport protection"
+      alt: "Temporary building protection"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Marina services"
+      alt: "Site weather barrier"
     },
     {
       src: "/images/marine.jpg",
-      alt: "Custom marine solutions"
+      alt: "Industrial wrapping solutions"
     },
     {
       src: "/images/construction.jpg",
-      alt: "Professional marine work"
-    },
-    {
-      src: "/images/marine.jpg",
-      alt: "Quality marine protection"
+      alt: "Construction environmental control"
     }
   ];
 
@@ -48,17 +48,17 @@ export default function Banner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título principal */}
         <h1 className="text-6xl md:text-7xl font-bold text-gray-800 font-heading mb-16 tracking-wide">
-          MARINE
+          CONSTRUCTION
         </h1>
         
         {/* Contenido descriptivo */}
         <div className="mb-16">
-          <MarineInfo />
+          <ConstructionInfo />
         </div>
         
         {/* Galería de imágenes simple */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {marineImages.map((image, index) => (
+          {constructionImages.map((image, index) => (
             <div 
               key={index}
               className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
