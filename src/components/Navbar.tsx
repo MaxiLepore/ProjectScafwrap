@@ -134,23 +134,19 @@ export const Navbar = () => {
           variants={hamburgerVariants}
           animate={menuOpen ? "open" : "closed"}
         >
-          {menuOpen ? (
-            <motion.span
-              initial={{ opacity: 0, rotate: -90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              &#10005;
-            </motion.span>
-          ) : (
+          {!menuOpen ? (
             <motion.span
               initial={{ opacity: 0, rotate: 90 }}
               animate={{ opacity: 1, rotate: 0 }}
               transition={{ duration: 0.2 }}
             >
-              &#9776;
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect y="6" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                <rect y="13" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                <rect y="20" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+              </svg>
             </motion.span>
-          )}
+          ) : null}
         </motion.button>
       </div>
       
@@ -158,29 +154,50 @@ export const Navbar = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="sm:hidden bg-white border-t border-gray-200 overflow-hidden"
-            variants={menuVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="sm:hidden fixed inset-0 z-50 flex"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
-            <motion.div 
-              className="px-4 pb-4 flex flex-col items-end"
-              variants={containerVariants}
+            {/* Overlay oscuro */}
+            <div
+              className="w-[30vw] h-full bg-black bg-opacity-40"
+              onClick={() => setMenuOpen(false)}
+            />
+            {/* Menú lateral */}
+            <motion.div
+              className="w-[70vw] h-full bg-white border-l border-gray-200 overflow-y-auto flex flex-col px-4 pb-4 relative"
+              variants={menuVariants}
               initial="closed"
               animate="open"
               exit="closed"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <motion.span 
-                className="block text-xs font-semibold text-[#1E1E1E] text-right mt-2 mb-2"
-                variants={itemVariants}
-                transition={{ duration: 0.2, delay: 0.1 }}
-              >
-                PH. <span className="text-[#008CD2] ml-1">0800 722 397</span>
-              </motion.span>
-              
-              <motion.nav 
+              {/* Fila superior: Teléfono a la izquierda, botón cerrar a la derecha */}
+              <div className="flex items-center justify-between w-full h-16 mb-2">
+                <span className="block text-xs font-semibold text-[#1E1E1E] text-left">
+                  PH. <span className="text-[#008CD2] ml-1">0800 722 397</span>
+                </span>
+                {/* Botón de cerrar (hamburguesa animada) */}
+                <motion.button
+                  className="text-3xl text-[#00AEEF] focus:outline-none z-10 flex items-center justify-center"
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Cerrar menú"
+                  whileTap={{ scale: 0.9 }}
+                  style={{ originX: 0.5, originY: 0.5 }}
+                  animate={menuOpen ? { rotate: 180 } : { rotate: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="6" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                    <rect y="13" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                    <rect y="20" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                  </svg>
+                </motion.button>
+              </div>
+              {/* Opciones del menú debajo */}
+              <motion.nav
                 className="flex flex-col gap-2 w-full items-end"
                 variants={containerVariants}
               >
@@ -191,11 +208,11 @@ export const Navbar = () => {
                       key={item.href}
                       variants={itemVariants}
                       transition={{ duration: 0.3, delay: 0.15 }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.05,
                         transition: { duration: 0.2 }
                       }}
-                      whileTap={{ 
+                      whileTap={{
                         scale: 0.95,
                         transition: { duration: 0.1 }
                       }}
@@ -208,7 +225,7 @@ export const Navbar = () => {
                       >
                         {item.label}
                         {isActive && (
-                          <motion.span 
+                          <motion.span
                             className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"
                             layoutId="activeIndicator"
                             transition={{

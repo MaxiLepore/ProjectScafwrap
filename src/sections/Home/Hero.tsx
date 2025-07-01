@@ -37,7 +37,7 @@ const slides = [
     description:
       "Scafwrap actively work with a local recycling facility in Auckland to recycle our Shrinkwrap",
     buttonText: "MORE INFO",
-    buttonLink: "Recycling",
+    buttonLink: "recycling",
   },
 ];
 
