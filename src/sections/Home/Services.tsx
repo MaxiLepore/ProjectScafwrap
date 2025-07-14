@@ -155,7 +155,7 @@ export default function Services() {
         <div className="mt-20 bg-white rounded-2xl shadow-lg p-8 md:p-12 max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <h3 className="text-3xl md:text-4xl font-bold font-heading mb-6">
-              <span className="text-gray-800">SCAF WRAP</span>{" "}
+              <span className="text-gray-800">SCAFWRAP LTD</span>{" "}
               <span className="text-cyan-400">SHRINK WRAPPING SERVICES</span>
             </h3>
           </div>
@@ -163,25 +163,21 @@ export default function Services() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-600 font-body leading-relaxed text-sm">
             <div>
               <p className="mb-4">
-                Welcome to Scaf Wrap. We provide shrink wrap solutions to the
-                building and construction industry for shrink wrapping
-                scaffolding during renovation, repair, re-cladding, roofing and
-                new build construction. It is often referred to as scaffolding,
-                sheeting or screening in the industry. Scaf Wrap are
-                Auckland&apos;s leading marine shrink wrap specialists,
-                providing weather proofing solutions during marine refits of
-                boats and yachts. We also plastic wrap houses and cover
-                temporary structures for all sorts of maintenance work and
-                events.
+              Welcome to Scafwrap, your premier provider of shrinkwrap solutions tailored for the 
+              building and construction, agricultural, and industrial sectors. We pride ourselves 
+              on our expertise in the marine industry, recognized as New Zealand&apos;s most experienced 
+              and reliable installers, catering to everything from trailer boats to mega yachts. 
+              Our services include protective coverings for international transport on the Superyacht 
+              Express and large tents designed for repainting and refitting the largest yachts.
               </p>
             </div>
             <div>
               <p className="mb-4">
-                Our 100% weather-tight guarantee allows you to continue working
-                in all weather. Our Shrinkwrap system, service and innovative
-                ideas have provided a broad range of New Zealand industries with
-                weatherproofing solutions, quality and service. We look forward
-                to helping you achieve the best solution for your next project.
+              Our weather-tight solutions enable you to maintain productivity regardless of weather 
+              conditions. Through our innovative shrinkwrap systems and dedicated service, we deliver 
+              effective weatherproofing solutions to a diverse array of New Zealand industries. 
+              Our continually evolving installation techniques often set the benchmark for industry 
+              standards as our reputation grows.
               </p>
             </div>
           </div>

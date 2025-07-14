@@ -2,8 +2,8 @@ import Banner from "@/sections/Marine/Banner"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ScafWrap NZ",
-  description: "Professional marine shrink wrap services in Auckland. Yacht wrapping, boat protection, super yacht refits & marine facility weatherproofing. Expert marine specialists.",
+  title: "Marine Shrink Wrap Auckland | ScafWrap NZ",
+  description: "Professional marine shrink wrap services in Auckland. Protection for yachts, boats, and marine facilities. Weatherproofing and transport solutions.",
   keywords: [
     "marine shrink wrap Auckland", "yacht wrapping Auckland", "boat shrink wrap NZ",
     "super yacht refit Auckland", "marine weatherproofing", "yacht protection",
@@ -11,9 +11,12 @@ export const metadata: Metadata = {
     "marine refit services", "boat transport protection", "yacht captains Auckland"
   ],
   openGraph: {
-    title: "ScafWrap NZ",
-    description: "Professional marine shrink wrap services in Auckland. Yacht wrapping, boat protection, super yacht refits & marine facility weatherproofing.",
+    type: "website",
+    locale: "en_NZ",
     url: "https://scafwrap.co.nz/marine",
+    siteName: "ScafWrap New Zealand",
+    title: "Marine Shrink Wrap Auckland | ScafWrap NZ",
+    description: "Professional marine shrink wrap services in Auckland. Protection for yachts, boats, and marine facilities. Weatherproofing and transport solutions.",
     images: [
       {
         url: "/images/marine-og-image.jpg",
@@ -23,9 +26,18 @@ export const metadata: Metadata = {
       }
     ]
   },
+  twitter: {
+    card: "summary_large_image",
+    site: "@scafwrapnz",
+    title: "Marine Shrink Wrap Auckland | ScafWrap NZ",
+    description: "Professional marine shrink wrap services in Auckland. Protection for yachts, boats, and marine facilities. Weatherproofing and transport solutions.",
+    images: ["/images/marine-og-image.jpg"]
+  },
   alternates: {
     canonical: "https://scafwrap.co.nz/marine"
-  }
+  },
+  category: "Marine Services",
+  classification: "Marine Shrink Wrap"
 };
 
 export default function MarinePage() {

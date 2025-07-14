@@ -47,9 +47,12 @@ export default function Banner() {
     <section className="bg-white py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título principal */}
-        <h1 className="text-4xl md:text-7xl font-bold text-gray-800 font-heading mb-10 tracking-wide">
-          RECYCLING
-        </h1>
+        <div className="relative inline-block mb-10">
+          <h1 className="text-4xl md:text-7xl font-bold text-gray-800 font-heading tracking-wide">
+            RECYCLING
+          </h1>
+          <div className="h-1 w-24 bg-gradient-to-r from-cyan-600 to-blue-500 rounded-full absolute left-0 -bottom-3"></div>
+        </div>
         
         {/* Contenido descriptivo */}
         <div className="mb-16">

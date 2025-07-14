@@ -27,8 +27,8 @@ const istok = Istok_Web({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://scafwrap.co.nz'),
-  title: "ScafWrap NZ",
-  description: "Leading shrink wrap specialists in Auckland, New Zealand. Professional marine yacht wrapping, construction site weatherproofing & scaffolding enclosure services. 90-day warranty.",
+  title: "ScafWrap NZ | Shrink Wrap Auckland - Marine & Construction Weatherproofing",
+  description: "Shrink wrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
   keywords: [
     "shrink wrap Auckland", "marine shrink wrap NZ", "yacht wrapping Auckland", 
     "construction weatherproofing", "scaffolding wrap", "boat shrink wrap", 
@@ -55,16 +55,23 @@ export const metadata: Metadata = {
     locale: "en_NZ",
     url: "https://scafwrap.co.nz",
     siteName: "ScafWrap New Zealand",
-    title: "ScafWrap NZ",
-    description: "Leading shrink wrap specialists in Auckland. Marine yacht wrapping, construction weatherproofing & scaffolding services. Contact us for professional solutions.",
+    title: "ScafWrap NZ | Shrink Wrap Auckland - Marine & Construction Weatherproofing",
+    description: "Shrink wrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
     images: [
       {
         url: "/images/scafwrap-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "ScafWrap professional shrink wrap services Auckland New Zealand"
+        alt: "ScafWrap - professional shrink wrap for yachts, boats, and construction in Auckland"
       }
     ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@scafwrapnz",
+    title: "ScafWrap NZ | Shrink Wrap Auckland - Marine & Construction Weatherproofing",
+    description: "Shrink wrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+    images: ["/images/scafwrap-og-image.jpg"]
   },
   alternates: {
     canonical: "https://scafwrap.co.nz"

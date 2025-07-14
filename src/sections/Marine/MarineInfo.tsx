@@ -8,23 +8,25 @@ export default function MarineInfo() {
           {/* Columna izquierda */}
           <div>
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              <span className="font-semibold text-gray-800">Scaf Wrap</span> are Auckland&apos;s leading marine shrink wrap specialists, providing weather proofing 
-              solutions during marine refits of boats and yachts. Scafwrap work closely with yacht 
-              captains and local shipyards, supplying shrink wrap systems for vessels of any size. We can 
-              cover just a particular area or the entire yacht or boat as required.
+              <span className="font-semibold text-gray-800">Scafwrap</span>  proudly stands as Auckland&apos;s premier marine 
+              shrinkwrap specialists, dedicated to delivering tried and tested weatherproofing solutions for 
+              yacht refits, maintenance And repairs. We collaborate closely with yacht captains and 
+              exclusively partner with Auckland&apos;s largest and most esteemed shipyards, offering tailored 
+              shrinkwrap systems suitable for vessels of all sizes.
+
             </p>
           </div>
           
           {/* Columna derecha */}
           <div className="space-y-6">
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              As well as weatherproofing the yacht or boat itself, we also shrink wrap structures for boat 
-              building and repair and have created contained facilities making it possible for the marine 
-              industry to undertake multiple international super yacht refits.
+            Whether you need to cover a specific 
+            area or the entire vessel, we can accommodate your requirements.
+            Moreover, Scafwrap provides protective coverings for various marine applications during transport 
+            and storage, ensuring that your vessel is safeguarded at all stages of its journey.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              Scafwrap also provide protective coverings for marine applications during transport or 
-              storage.
+              
             </p>
           </div>
         </div>

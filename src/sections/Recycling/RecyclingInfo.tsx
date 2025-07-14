@@ -8,23 +8,20 @@ export default function RecyclingInfo() {
           {/* Columna izquierda */}
           <div>
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              <span className="font-semibold text-gray-800">ScafWrap</span> is committed to environmental 
-              sustainability and responsible waste management across all our marine and construction services 
-              in Auckland and throughout New Zealand. Our comprehensive recycling program ensures that 
-              materials from shrink wrap projects are processed through certified environmental channels.
+              <span className="font-semibold text-gray-800">Scafwrap</span>  takes pride in our 
+              partnership with Safesmart Access NZ and Safeseal Shrinkwrap, a product we have played 
+              a pivotal role in developing and fine-tuning for the New Zealand market. We are committed to sustainability 
+              and can confidently state that 100% of the used shrinkwrap we dismantle is recycled through Safesmart&apos;s &apos;Wrap Cycle&apos; program. 
             </p>
           </div>
           
           {/* Columna derecha */}
           <div className="space-y-6">
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              We partner with licensed recycling facilities and maintain strict environmental compliance 
-              standards, ensuring all waste materials are sorted, processed, and recycled according to 
-              New Zealand environmental regulations and circular economy principles.
-            </p>
-            <p className="text-gray-700 text-lg leading-relaxed font-light">
-              ScafWrap also provides comprehensive environmental documentation and certification to help 
-              your projects achieve sustainability goals and reduce carbon footprint.
+            This initiative transforms our discarded materials into a variety of innovative products, promoting environmental responsibility and reducing waste.
+            By collaborating with these industry leaders, Scafwrap not only supports 
+            eco-friendly practices but also contributes to a circular economy, ensuring that our 
+            operations have a positive impact on the environment.
             </p>
           </div>
         </div>

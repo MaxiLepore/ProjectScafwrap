@@ -8,25 +8,34 @@ export default function ConstructionInfo() {
           {/* Columna izquierda */}
           <div>
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              <span className="font-semibold text-gray-800">Scafwrap</span> work with large construction companies, small builders, scaffolding companies, 
-              home owners and event organisers on projects ranging in size and complexity.
+              <span className="font-semibold text-gray-800">Scafwrap</span> collaborates with a diverse range of partners, 
+              including major construction companies, builders, scaffolding firms, homeowners, and event 
+              organisers, on projects of varying sizes and complexities. While our base is in Central Auckland, 
+              our services extend across New Zealand.
+
             </p>
             <p className="text-gray-700 text-lg leading-relaxed font-light mt-6">
-              Although <span className="font-semibold text-gray-800">Scaf Wrap</span> is based in Central Auckland, we work on projects throughout New 
-              Zealand.
+            In the construction and building sector, we specialise in weatherproofing construction 
+            sites for renovations, new buildings/developments, and repairs to leaky buildings. Our 
+            primary method often involves shrink wrapping scaffolding, although we are equipped to 
+            implement other customised solutions as required.
             </p>
           </div>
           
           {/* Columna derecha */}
           <div className="space-y-6">
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              In the construction and building industry we specialise in weatherproofing construction sites 
-              for renovation work, new buildings and repairing damage to leaky buildings. This normally 
-              involves shrink wrapping the scaffolding but other customised methods can be used.
+            We have established a strong reputation within the industry for the ability of our 
+            wraps to withstand the frequent harsh weather conditions that Auckland and New Zealand 
+            experience. However, our most notable attribute is our reliability. We take pride in our 
+            commitment to punctuality and maintain open lines of communication with our clients, 
+            keeping them informed about the progress of each project and its current status.
+
             </p>
             <p className="text-gray-700 text-lg leading-relaxed font-light">
-              The quality shrink wrap product we offer is a far superior product to the traditional tarp and 
-              we stand by our 90 day warranty.
+            At Scafwrap, we understand the importance of protecting your investment and ensuring that 
+            construction timelines are met, regardless of external conditions. Our dedicated team work 
+            hard to provide a dependable, high-quality service that meets the unique needs of every project.
             </p>
           </div>
         </div>
