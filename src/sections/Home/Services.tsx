@@ -74,7 +74,7 @@ export default function Services() {
 
         {/* Grid de servicios mejorado */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <TransitionLink
               key={service.id}
               href={service.link}

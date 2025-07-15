@@ -1,6 +1,5 @@
 // src/components/Footer.tsx
 import Image from "next/image"
-import Link from "next/link"
 import TransitionLink from "@/components/TransitionLink";
 
 export const Footer = () => {
