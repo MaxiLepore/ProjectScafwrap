@@ -5,6 +5,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
+import TransitionLink from "@/components/TransitionLink";
 
 const slides = [
   {
@@ -87,12 +88,12 @@ export default function Hero() {
                 <p className="mt-2 pr-10 lg:pr-0 sm:mt-3 lg:mt-4 font-body text-white drop-shadow-md text-left lg:text-right max-w-full sm:max-w-sm lg:max-w-2xl text-[12px] sm:text-[13px] lg:text-[16px] leading-relaxed">
                   {slide.description}
                 </p>
-                <a
-                  href={slide.buttonLink}
+                <TransitionLink
+                  href={`/${slide.buttonLink}`}
                   className="mt-3 sm:mt-4 lg:mt-3 px-3 sm:px-4 py-2 bg-secondary text-white uppercase tracking-wide text-[10px] sm:text-xs shadow-lg hover:bg-white hover:text-secondary border-2 border-secondary transition-colors duration-300 transform hover:scale-105"
                 >
                   {slide.buttonText}
-                </a>
+                </TransitionLink>
               </div>
             </div>
           </SwiperSlide>

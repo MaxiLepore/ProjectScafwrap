@@ -2,10 +2,10 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { usePageTransitionContext } from "@/components/PageTransition/PageTransitionProvider"
 
 const navItems = [
   { label: "HOME", href: "/" },
@@ -19,14 +19,23 @@ const navItems = [
 export const Navbar = () => {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const { transitionTo, isLoading } = usePageTransitionContext()
 
-  // Función para manejar navegación en móviles
-  const handleMobileNavigation = (href: string) => {
+  // Función para manejar navegación en móviles con transición
+  const handleMobileNavigation = async (href: string) => {
     setMenuOpen(false)
     // Pequeño delay para que se vea la animación de cierre
-    setTimeout(() => {
-      window.location.href = href
+    setTimeout(async () => {
+      await transitionTo(href)
     }, 200)
+  }
+
+  // Función para manejar navegación en desktop con transición
+  const handleDesktopNavigation = async (e: React.MouseEvent, href: string) => {
+    e.preventDefault()
+    if (!isLoading) {
+      await transitionTo(href)
+    }
   }
 
   // Variantes de animación para el menú
@@ -90,7 +99,11 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-start justify-between">
         {/* Izquierda: Logo con espacio rectangular */}
         <div className="flex items-center w-[180px] sm:w-2/5">
-          <Link href="/" className="relative w-[140px] h-[48px] sm:w-[260px] sm:h-[80px] cursor-pointer">
+          <button
+            onClick={(e) => handleDesktopNavigation(e, "/")}
+            disabled={isLoading}
+            className={`relative w-[140px] h-[48px] sm:w-[260px] sm:h-[80px] ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+          >
             <Image
               src="/logoScafwrap.png"
               alt="Scafwrap Logo"
@@ -99,7 +112,7 @@ export const Navbar = () => {
               className="object-contain hover:opacity-90 transition-opacity duration-200"
               priority
             />
-          </Link>
+          </button>
         </div>
         {/* Desktop: Número y secciones */}
         <div className="hidden sm:flex flex-col w-3/5 items-end">
@@ -110,18 +123,19 @@ export const Navbar = () => {
             {navItems.map((item) => {
               const isActive = pathname === item.href
               return (
-                <Link
+                <button
                   key={item.href}
-                  href={item.href}
+                  onClick={(e) => handleDesktopNavigation(e, item.href)}
+                  disabled={isLoading || isActive}
                   className={`relative text-xs md:text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200
                     ${isActive ? "text-[#00AEEF]" : "text-[#1E1E1E]"}
-                    hover:text-[#00BFFF]`}
+                    ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:text-[#00BFFF] cursor-pointer"}`}
                 >
                   {item.label}
                   {isActive && (
                     <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"></span>
                   )}
-                </Link>
+                </button>
               )
             })}
           </nav>

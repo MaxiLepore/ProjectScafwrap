@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next"
 import { ReactNode } from "react"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
+import PageTransitionProvider from "@/components/PageTransition/PageTransitionProvider"
 
 import { Montserrat, Istok_Web } from "next/font/google"
 
@@ -203,9 +204,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="alternate" hrefLang="en" href="https://scafwrap.co.nz" />
       </head>
       <body className="font-sans bg-white text-gray-900">
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <PageTransitionProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </PageTransitionProvider>
       </body>
     </html>
   )
