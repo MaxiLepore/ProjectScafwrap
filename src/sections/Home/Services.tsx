@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import TransitionLink from "@/components/TransitionLink";
 
 const services = [
   {
@@ -74,13 +75,10 @@ export default function Services() {
         {/* Grid de servicios mejorado */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
-            <a
+            <TransitionLink
               key={service.id}
               href={service.link}
               className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white block"
-              style={{
-                animationDelay: `${index * 0.1}s`,
-              }}
             >
               {/* Imagen de fondo mejorada */}
               <div className="relative h-80 md:h-96 overflow-hidden">
@@ -147,7 +145,7 @@ export default function Services() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent" />
               </div>
-            </a>
+            </TransitionLink>
           ))}
         </div>
 

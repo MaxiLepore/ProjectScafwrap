@@ -11,7 +11,7 @@ export default function LoadingSpinner({ isVisible }: LoadingSpinnerProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm"
+      className="fixed inset-0 z-60 flex items-center justify-center bg-white/90 backdrop-blur-sm pointer-events-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

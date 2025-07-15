@@ -1,6 +1,7 @@
 // src/components/Footer.tsx
 import Image from "next/image"
 import Link from "next/link"
+import TransitionLink from "@/components/TransitionLink";
 
 export const Footer = () => {
   return (
@@ -13,12 +14,12 @@ export const Footer = () => {
             <span className="absolute left-0 -bottom-1 w-10 h-1 bg-[#36c6f4] rounded transition-all duration-300 group-hover:w-20" />
           </h3>
           <ul className="space-y-1 text-sm mt-6">
-            <li><Link href="/" className="hover:text-[#36c6f4] transition-colors duration-200">HOME</Link></li>
-            <li><Link href="/marine" className="hover:text-[#36c6f4] transition-colors duration-200">MARINE</Link></li>
-            <li><Link href="/construction" className="hover:text-[#36c6f4] transition-colors duration-200">CONSTRUCTION</Link></li>
-            <li><Link href="/reclads" className="hover:text-[#36c6f4] transition-colors duration-200">RECLADS</Link></li>
-            <li><Link href="/recycling" className="hover:text-[#36c6f4] transition-colors duration-200">RECYCLING</Link></li>
-            <li><Link href="/contact" className="hover:text-[#36c6f4] transition-colors duration-200">CONTACT</Link></li>
+            <li><TransitionLink href="/" className="hover:text-[#36c6f4] transition-colors duration-200">HOME</TransitionLink></li>
+            <li><TransitionLink href="/marine" className="hover:text-[#36c6f4] transition-colors duration-200">MARINE</TransitionLink></li>
+            <li><TransitionLink href="/construction" className="hover:text-[#36c6f4] transition-colors duration-200">CONSTRUCTION</TransitionLink></li>
+            <li><TransitionLink href="/reclads" className="hover:text-[#36c6f4] transition-colors duration-200">RECLADS</TransitionLink></li>
+            <li><TransitionLink href="/recycling" className="hover:text-[#36c6f4] transition-colors duration-200">RECYCLING</TransitionLink></li>
+            <li><TransitionLink href="/contact" className="hover:text-[#36c6f4] transition-colors duration-200">CONTACT</TransitionLink></li>
           </ul>
         </div>
         {/* GET IN TOUCH */}
