@@ -29,7 +29,7 @@ export const Footer = () => {
           </h3>
           <div className="text-sm space-y-2 mt-6">
             <div>
-              <span className="font-semibold">FREE PHONE:</span> 0800 SCAFWrap<br />
+              <span className="font-semibold">FREE PHONE:</span> 0800 SCAFWRAP<br />
               (0800 722 397)
             </div>
             <div>
