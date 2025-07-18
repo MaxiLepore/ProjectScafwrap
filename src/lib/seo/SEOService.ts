@@ -56,13 +56,13 @@ export abstract class BaseSEOService {
 // Dependency Inversion: Implementaciones específicas
 export class MarineSEOService extends BaseSEOService {
   protected buildTitle(title: string): string {
-    return `${title} | Marine Shrink Wrap Auckland - ScafWrap NZ`;
+    return `${title} | Marine Shrink Wrap Auckland - Scafwrap NZ`;
   }
 }
 
 export class ConstructionSEOService extends BaseSEOService {
   protected buildTitle(title: string): string {
-    return `${title} | Construction Scaffolding Wrap Auckland - ScafWrap NZ`;
+    return `${title} | Construction Scaffolding Wrap Auckland - Scafwrap NZ`;
   }
 }
 

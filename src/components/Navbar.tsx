@@ -105,7 +105,7 @@ export const Navbar = () => {
             className={`relative w-[140px] h-[48px] sm:w-[260px] sm:h-[80px] ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
             <Image
-              src="/logoScafwrap.png"
+              src="/logoScafwrap.jpeg"
               alt="Scafwrap Logo"
               fill
               sizes="(max-width: 640px) 140px, 260px"
