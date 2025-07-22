@@ -29,17 +29,17 @@ export default function ContactPage() {
     setStatus(null);
     try {
       await emailjs.send(
-        'service_oqpns6j',
-        'template_1gjgcjg',
+        'service_e6222um',
+        'template_ghkhzxj',
         {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           company: formData.company,
-          title: formData.subject,
+          subject: formData.subject,
           message: formData.message
         },
-        '8lC1Nuqb1a81sM6oF'
+        'J8OMBc0U-Gyf19VNx'
       );
       setStatus('success');
       setFormData({

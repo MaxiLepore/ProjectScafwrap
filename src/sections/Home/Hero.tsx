@@ -10,7 +10,7 @@ import TransitionLink from "@/components/TransitionLink";
 const slides = [
   {
     image: "/images/hero/Marine.jpg",
-    title: "Shrink Wrap for Marine Refits",
+    title: "Shrinkwrap for Marine Refits",
     description:
       "Scafwrap work closely with yacht captains and Auckland shipyards, supplying weatherproof shrink wrapping solutions for boats, yachts and all marine refits",
     buttonText: "MORE INFO",
@@ -18,7 +18,7 @@ const slides = [
   },
   {
     image: "/images/hero/Construction.jpg",
-    title: "Shrink Wrap for Construction",
+    title: "Shrinkwrap for Construction",
     description:
       "Scafwrap provide shrink wrap solutions for large construction & scaffolding companies, small builders and home owners on all types of building projects",
     buttonText: "MORE INFO",
@@ -26,15 +26,15 @@ const slides = [
   },
   {
     image: "/images/hero/Reclads.jpg",
-    title: "Shrink Wrap for Reclads",
+    title: "Shrinkwrap for Reclads",
     description:
-      "Scafwrap provide a unique, full encapsulation shrink wrap solution for weatherproofing leaky homes and all types of building reclads",
+      "Scafwrap provide a unique, full encapsulation shrinkwrap solution for weatherproofing leaky homes and all types of building reclads",
     buttonText: "MORE INFO",
     buttonLink: "reclads",
   },
   {
     image: "/images/recycling.jpg",
-    title: "Shrink Wrap for Recycling",
+    title: "Shrinkwrap for Recycling",
     description:
       "Scafwrap actively work with a local recycling facility in Auckland to recycle our Shrinkwrap",
     buttonText: "MORE INFO",

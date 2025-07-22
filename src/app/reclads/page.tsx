@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Banner from "@/sections/Reclads/Banner"
 
 export const metadata: Metadata = {
-  title: "Reclad & Weathertightness Auckland | ScafWrap NZ",
+  title: "Reclad & Weathertightness Auckland | Scafwrap NZ",
   description: "Expert building reclad and weathertightness solutions in Auckland. Residential & commercial upgrades, leaky building repairs, and heritage restoration.",
   keywords: [
     "reclad Auckland", "building envelope Auckland", "weathertightness Auckland", 
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_NZ",
     url: "https://scafwrap.co.nz/reclads",
-    siteName: "ScafWrap New Zealand",
-    title: "Reclad & Weathertightness Auckland | ScafWrap NZ",
+    siteName: "Scafwrap New Zealand",
+    title: "Reclad & Weathertightness Auckland | Scafwrap NZ",
     description: "Expert building reclad and weathertightness solutions in Auckland. Residential & commercial upgrades, leaky building repairs, and heritage restoration.",
     images: [
       {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@scafwrapnz",
-    title: "Reclad & Weathertightness Auckland | ScafWrap NZ",
+    title: "Reclad & Weathertightness Auckland | Scafwrap NZ",
     description: "Expert building reclad and weathertightness solutions in Auckland. Residential & commercial upgrades, leaky building repairs, and heritage restoration.",
     images: ["/images/reclads-og.jpg"]
   },

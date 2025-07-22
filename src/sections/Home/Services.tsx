@@ -7,9 +7,9 @@ const services = [
   {
     id: "marine",
     title: "MARINE",
-    subtitle: "Shrink wrap for boats & yachts",
+    subtitle: "Shrinkwrap for boats & yachts",
     description:
-      "Professional marine shrink wrapping services for yacht refits, boat storage, and marine protection in Auckland shipyards.",
+      "Professional marine shrinkwrapping services for yacht refits, boat storage, and marine protection in Auckland shipyards.",
     image: "/serviceimage/marineservice.jpg",
     link: "/marine",
     color: "from-blue-500 to-cyan-400",
@@ -17,7 +17,7 @@ const services = [
   {
     id: "construction",
     title: "CONSTRUCTION",
-    subtitle: "Shrink wrap for scaffolding & construction",
+    subtitle: "Shrinkwrap for scaffolding & construction",
     description:
       "Comprehensive shrink wrap solutions for construction sites, scaffolding protection, and weather-resistant building coverage.",
     image: "/serviceimage/constructionservice.jpg",
@@ -27,9 +27,9 @@ const services = [
   {
     id: "reclads",
     title: "RECLADS",
-    subtitle: "Shrink wrap for recladding & leaky buildings",
+    subtitle: "Shrinkwrap for recladding & leaky buildings",
     description:
-      "Specialized weatherproof shrink wrapping for building reclads, leaky home repairs, and structural renovations.",
+      "Specialized weatherproof shrinkwrapping for building reclads, leaky home repairs, and structural renovations.",
     image: "/serviceimage/recladsservice.jpg",
     link: "/reclads",
     color: "from-blue-600 to-cyan-500",
@@ -37,9 +37,9 @@ const services = [
   {
     id: "recycling",
     title: "RECYCLING",
-    subtitle: "Shrink wrap services & sustainability",
+    subtitle: "Shrinkwrap services & sustainability",
     description:
-      "Eco-friendly shrink wrap solutions with recycling programs and sustainable materials for environmentally conscious projects.",
+      "Eco-friendly shrinkwrap solutions with recycling programs and sustainable materials for environmentally conscious projects.",
     image: "/serviceimage/recyclingservice.jpg",
     link: "/recycling",
     color: "from-cyan-600 to-blue-500",
@@ -67,7 +67,7 @@ export default function Services() {
             <div className="h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mt-4 mx-auto w-24"></div>
           </div>
           <p className="text-gray-700 text-lg mt-6 max-w-2xl mx-auto font-body">
-            Professional shrink wrapping solutions across New Zealand for
+            Professional shrinkwrapping solutions across New Zealand for
             marine, construction, and specialty applications
           </p>
         </div>
@@ -154,7 +154,7 @@ export default function Services() {
           <div className="text-center mb-8">
             <h3 className="text-3xl md:text-4xl font-bold font-heading mb-6">
               <span className="text-gray-800">SCAFWRAP LTD</span>{" "}
-              <span className="text-cyan-400">SHRINK WRAPPING SERVICES</span>
+              <span className="text-cyan-400">SHRINKWRAPPING SERVICES</span>
             </h3>
           </div>
 

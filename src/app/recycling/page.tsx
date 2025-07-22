@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Banner from "@/sections/Recycling/Banner"
 
 export const metadata: Metadata = {
-  title: "Recycling & Sustainability Auckland | ScafWrap NZ",
+  title: "Recycling & Sustainability Auckland | Scafwrap NZ",
   description: "Professional recycling and environmental services in Auckland. Eco-friendly waste management and sustainable practices for marine and construction industries.",
   keywords: [
     "recycling Auckland", "environmental services", "waste management Auckland", 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     locale: "en_NZ",
     url: "https://scafwrap.co.nz/recycling",
     siteName: "ScafWrap New Zealand",
-    title: "Recycling & Sustainability Auckland | ScafWrap NZ",
+    title: "Recycling & Sustainability Auckland | Scafwrap NZ",
     description: "Professional recycling and environmental services in Auckland. Eco-friendly waste management and sustainable practices for marine and construction industries.",
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@scafwrapnz",
-    title: "Recycling & Sustainability Auckland | ScafWrap NZ",
+    title: "Recycling & Sustainability Auckland | Scafwrap NZ",
     description: "Professional recycling and environmental services in Auckland. Eco-friendly waste management and sustainable practices for marine and construction industries.",
     images: ["/images/recycling-og-image.jpg"]
   },
