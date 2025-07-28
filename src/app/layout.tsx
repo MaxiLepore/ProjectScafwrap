@@ -28,8 +28,8 @@ const istok = Istok_Web({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://scafwrap.co.nz'),
-  title: "ScafWrap NZ | Shrink Wrap Auckland - Marine & Construction Weatherproofing",
-  description: "Shrink wrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+  title: "Scafwrap NZ | Shrinkwrap Auckland - Marine & Construction Weatherproofing",
+  description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
   keywords: [
     "shrink wrap Auckland", "marine shrink wrap NZ", "yacht wrapping Auckland", 
     "construction weatherproofing", "scaffolding wrap", "boat shrink wrap", 
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     "weather protection New Zealand", "ScafWrap", "shrink wrap specialists",
     "yacht maintenance Auckland", "construction site protection", "marine services NZ"
   ],
-  authors: [{ name: "ScafWrap NZ" }],
-  creator: "ScafWrap",
-  publisher: "ScafWrap New Zealand",
+  authors: [{ name: "Scafwrap NZ" }],
+  creator: "Scafwrap",
+  publisher: "Scafwrap New Zealand",
   robots: { 
     index: true, 
     follow: true,
@@ -55,23 +55,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_NZ",
     url: "https://scafwrap.co.nz",
-    siteName: "ScafWrap New Zealand",
-    title: "ScafWrap NZ | Shrink Wrap Auckland - Marine & Construction Weatherproofing",
-    description: "Shrink wrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+    siteName: "Scafwrap New Zealand",
+    title: "Scafwrap NZ | Shrinkwrap Auckland - Marine & Construction Weatherproofing",
+    description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
     images: [
       {
         url: "/images/scafwrap-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "ScafWrap - professional shrink wrap for yachts, boats, and construction in Auckland"
+        alt: "Scafwrap - professional shrinkwrap for yachts, boats, and construction in Auckland"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
     site: "@scafwrapnz",
-    title: "ScafWrap NZ | Shrink Wrap Auckland - Marine & Construction Weatherproofing",
-    description: "Shrink wrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+    title: "Scafwrap NZ | Shrinkwrap Auckland - Marine & Construction Weatherproofing",
+    description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
     images: ["/images/scafwrap-og-image.jpg"]
   },
   alternates: {
@@ -126,14 +126,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 {
                   "@type": "LocalBusiness",
                   "@id": "https://scafwrap.co.nz/#business",
-                  "name": "ScafWrap New Zealand",
+                  "name": "Scafwrap New Zealand",
                   "image": {
                     "@type": "ImageObject",
                     "url": "https://scafwrap.co.nz/images/logo.png",
                     "width": 400,
                     "height": 300
                   },
-                  "description": "Professional shrink wrap services for marine and construction applications in Auckland, New Zealand",
+                  "description": "Professional shrinkwrap services for marine and construction applications in Auckland, New Zealand",
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Auckland",
@@ -154,14 +154,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   },
                   "hasOfferCatalog": {
                     "@type": "OfferCatalog",
-                    "name": "Shrink Wrap Services",
+                    "name": "Shrinkwrap Services",
                     "itemListElement": [
                       {
                         "@type": "Offer",
                         "itemOffered": {
                           "@type": "Service",
-                          "name": "Marine Shrink Wrap",
-                          "description": "Professional yacht and boat shrink wrapping services"
+                          "name": "Marine Shrinkwrap",
+                          "description": "Professional yacht and boat shrinkwrapping services"
                         }
                       },
                       {
@@ -182,8 +182,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   "@type": "WebSite",
                   "@id": "https://scafwrap.co.nz/#website",
                   "url": "https://scafwrap.co.nz",
-                  "name": "ScafWrap New Zealand",
-                  "description": "Professional shrink wrap services for marine and construction",
+                  "name": "Scafwrap New Zealand",
+                  "description": "Professional shrinkwrap services for marine and construction",
                   "publisher": {
                     "@id": "https://scafwrap.co.nz/#business"
                   },
