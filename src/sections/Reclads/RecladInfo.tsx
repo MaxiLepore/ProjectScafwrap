@@ -11,10 +11,6 @@ export default function RecladInfo() {
               throughout Auckland and New Zealand, working with property owners, developers, and building contractors on weathertightness and facade 
               upgrade projects.
             </p>
-            <p className="text-gray-700 text-lg leading-relaxed font-light mt-6">
-              Our team of <span className="font-semibold text-gray-800">Licensed Building Practitioners</span> ensures all reclad work meets New Zealand 
-              Building Code requirements and provides long-term weatherproofing solutions.
-            </p>
           </div>
           
           {/* Columna derecha */}

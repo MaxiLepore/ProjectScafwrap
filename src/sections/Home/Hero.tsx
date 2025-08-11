@@ -12,7 +12,7 @@ const slides = [
     image: "/images/hero/Marine.jpg",
     title: "Shrinkwrap for Marine Refits",
     description:
-      "Scafwrap work closely with yacht captains and Auckland shipyards, supplying weatherproof shrink wrapping solutions for boats, yachts and all marine refits",
+      "Scafwrap work closely with yacht captains and Auckland shipyards, supplying weatherproof shrinkwrapping solutions for boats, yachts and all marine refits",
     buttonText: "MORE INFO",
     buttonLink: "marine",
   },
@@ -20,7 +20,7 @@ const slides = [
     image: "/images/hero/Construction.jpg",
     title: "Shrinkwrap for Construction",
     description:
-      "Scafwrap provide shrink wrap solutions for large construction & scaffolding companies, small builders and home owners on all types of building projects",
+      "Scafwrap provide shrinkwrap solutions for large construction & scaffolding companies, small builders and home owners on all types of building projects",
     buttonText: "MORE INFO",
     buttonLink: "construction",
   },
