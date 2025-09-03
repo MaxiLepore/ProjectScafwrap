@@ -40,6 +40,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Scafwrap NZ" }],
   creator: "Scafwrap",
   publisher: "Scafwrap New Zealand",
+  icons: {
+    icon: [
+      { url: "/logoScafwrap.jpeg", type: "image/jpeg" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    shortcut: "/logoScafwrap.jpeg",
+    apple: "/logoScafwrap.jpeg",
+  },
   robots: { 
     index: true, 
     follow: true,
@@ -98,6 +106,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${montserrat.variable} ${istok.variable}`}
     >
       <head>
+        {/* Favicon and App Icons */}
+        <link rel="icon" href="/logoScafwrap.jpeg" type="image/jpeg" sizes="any" />
+        <link rel="shortcut icon" href="/logoScafwrap.jpeg" />
+        <link rel="apple-touch-icon" href="/logoScafwrap.jpeg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logoScafwrap.jpeg" />
+        <meta name="msapplication-TileImage" content="/logoScafwrap.jpeg" />
+        <meta name="msapplication-TileColor" content="#00AEEF" />
+        <meta name="theme-color" content="#00AEEF" />
+        
         {/* Critical Resource Hints - Load First */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
