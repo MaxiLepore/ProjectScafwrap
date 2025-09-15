@@ -13,6 +13,11 @@ export class ImageOptimizer {
   
   // Single Responsibility: Solo optimiza imágenes
   public getOptimizedImageProps(src: string, alt: string, priority = false) {
+    // Marcar inicio de carga para métricas
+    if (priority) {
+      performance.mark(`image-start-${src}`);
+    }
+
     return {
       src,
       alt,
@@ -22,7 +27,19 @@ export class ImageOptimizer {
       quality: 85,
       placeholder: 'blur' as const,
       blurDataURL: this.generateBlurDataURL(),
-      loading: priority ? 'eager' as const : 'lazy' as const
+      loading: priority ? 'eager' as const : 'lazy' as const,
+      // Agregar optimizaciones adicionales
+      unoptimized: false,
+      onLoad: () => {
+        if (priority) {
+          performance.mark(`image-loaded-${src}`);
+        }
+      },
+      onError: () => {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`Image optimization failed for: ${src}`);
+        }
+      }
     };
   }
   

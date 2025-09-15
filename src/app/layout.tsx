@@ -87,7 +87,25 @@ export const metadata: Metadata = {
   },
   category: "Business Services",
   classification: "Marine and Construction Services",
-  referrer: "origin-when-cross-origin"
+  referrer: "origin-when-cross-origin",
+  verification: {
+    // 🔧 PASO 1: Reemplaza estos códigos con tus códigos reales de verificación
+    // Google Search Console: https://search.google.com/search-console
+    google: "REEMPLAZA_CON_TU_CODIGO_GOOGLE_AQUI",
+    other: {
+      // Bing Webmaster Tools: https://www.bing.com/webmasters
+      "msvalidate.01": "REEMPLAZA_CON_TU_CODIGO_BING_AQUI",
+    },
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Scafwrap NZ",
+    "application-name": "Scafwrap NZ",
+    "msapplication-TileColor": "#00AEEF",
+    "msapplication-config": "/browserconfig.xml",
+  }
 }
 
 export const viewport: Viewport = {
@@ -111,8 +129,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="shortcut icon" href="/logoScafwrap.jpeg" />
         <link rel="apple-touch-icon" href="/logoScafwrap.jpeg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logoScafwrap.jpeg" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="msapplication-TileImage" content="/logoScafwrap.jpeg" />
         <meta name="msapplication-TileColor" content="#00AEEF" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="theme-color" content="#00AEEF" />
         
         {/* Critical Resource Hints - Load First */}
@@ -129,9 +149,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="geo.position" content="-36.8485;174.7633" />
         <meta name="ICBM" content="-36.8485, 174.7633" />
         
-        {/* Verification - Replace with real codes */}
-        <meta name="google-site-verification" content="your-google-verification-code" />
-        <meta name="msvalidate.01" content="your-bing-verification-code" />
+        {/* Verification - Add your actual verification codes here */}
+        {/* 
+        🔧 PASO 1: Descomenta y reemplaza estos códigos con tus códigos reales
+        <meta name="google-site-verification" content="TU_CODIGO_GOOGLE_AQUI" />
+        <meta name="msvalidate.01" content="TU_CODIGO_BING_AQUI" />
+        */}
         
         {/* Structured Data - Non-blocking */}
         <script

@@ -1,0 +1,27 @@
+{
+  "name": "Scafwrap NZ - Professional Shrink Wrap Services",
+  "short_name": "Scafwrap NZ",
+  "description": "Professional shrinkwrap services for marine and construction applications in Auckland, New Zealand",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00AEEF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logoScafwrap.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logoScafwrap.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en-NZ",
+  "dir": "ltr"
+}
