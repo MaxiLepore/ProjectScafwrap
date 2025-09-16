@@ -27,10 +27,26 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
+    
     try {
+      // Validar en el servidor primero
+      const validationResponse = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!validationResponse.ok) {
+        const errorData = await validationResponse.json();
+        console.error('Validation error:', errorData);
+        setStatus('error');
+        return;
+      }
+      
+      // Si pasa la validación, enviar con EmailJS
       await emailjs.send(
-        'service_e6222um',
-        'template_ghkhzxj',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
           name: formData.name,
           email: formData.email,
@@ -39,7 +55,7 @@ export default function ContactPage() {
           subject: formData.subject,
           message: formData.message
         },
-        'J8OMBc0U-Gyf19VNx'
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
       setStatus('success');
       setFormData({

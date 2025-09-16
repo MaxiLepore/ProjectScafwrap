@@ -134,6 +134,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="msapplication-TileColor" content="#00AEEF" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="theme-color" content="#00AEEF" />
+        <meta name="google-site-verification" content="hCXuWlL4pDm1LOqZJusDxK4FzmXPZyzxNZdyUNaoqxk" />
         
         {/* Critical Resource Hints - Load First */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

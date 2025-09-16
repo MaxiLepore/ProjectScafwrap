@@ -66,10 +66,10 @@ export default function Services() {
             </h2>
             <div className="h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mt-4 mx-auto w-24"></div>
           </div>
-          <p className="text-gray-700 text-lg mt-6 max-w-2xl mx-auto font-body">
+          <h2 className="text-gray-700 text-lg mt-6 max-w-2xl mx-auto font-body">
             Professional shrinkwrapping solutions across New Zealand for
             marine, construction, and specialty applications
-          </p>
+          </h2>
         </div>
 
         {/* Grid de servicios mejorado */}
@@ -161,23 +161,23 @@ export default function Services() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-600 font-body leading-relaxed text-sm">
             <div>
-              <p className="mb-4">
+              <h4 className="mb-4">
               Welcome to Scafwrap, your premier provider of shrinkwrap solutions tailored for the 
               building and construction, agricultural, and industrial sectors. We pride ourselves 
               on our expertise in the marine industry, recognized as New Zealand&apos;s most experienced 
               and reliable installers, catering to everything from trailer boats to mega yachts. 
               Our services include protective coverings for international transport on the Superyacht 
               Express and large tents designed for repainting and refitting the largest yachts.
-              </p>
+              </h4>
             </div>
             <div>
-              <p className="mb-4">
+              <h4 className="mb-4">
               Our weather-tight solutions enable you to maintain productivity regardless of weather 
               conditions. Through our innovative shrinkwrap systems and dedicated service, we deliver 
               effective weatherproofing solutions to a diverse array of New Zealand industries. 
               Our continually evolving installation techniques often set the benchmark for industry 
               standards as our reputation grows.
-              </p>
+              </h4>
             </div>
           </div>
         </div>

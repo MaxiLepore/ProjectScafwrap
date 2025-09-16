@@ -52,7 +52,7 @@ export default function Hero() {
   } = useCarousel({
     totalSlides: slides.length,
     autoPlayInterval: 5000,
-    pauseOnHover: false
+    pauseOnHover: true
   });
 
   // Hook para gestos táctiles en mobile
@@ -78,7 +78,9 @@ export default function Hero() {
 
   return (
     <section 
-      className="relative w-full sm:h-[85vh] lg:h-[90vh] overflow-hidden"
+      className="relative w-full xs:h-[85vh] sm:h-[85vh] lg:h-[90vh] overflow-hidden"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -108,17 +110,12 @@ export default function Hero() {
       </div>
 
       {/* Indicadores del carrusel mejorados */}
-      <div 
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <CarouselIndicators
-          totalSlides={slides.length}
-          currentSlide={currentSlide}
-          onSlideChange={goToSlide}
-          className="bottom-2 sm:bottom-4 lg:bottom-8"
-        />
-      </div>
+      <CarouselIndicators
+        totalSlides={slides.length}
+        currentSlide={currentSlide}
+        onSlideChange={goToSlide}
+        className="bottom-2 sm:bottom-4 lg:bottom-8"
+      />
       {/* Estilos globales mejorados para el componente Hero */}
       <style jsx global>{`
         .clip-top-left-triangle {
