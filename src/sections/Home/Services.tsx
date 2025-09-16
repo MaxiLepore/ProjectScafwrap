@@ -19,7 +19,7 @@ const services = [
     title: "CONSTRUCTION",
     subtitle: "Shrinkwrap for scaffolding & construction",
     description:
-      "Comprehensive shrink wrap solutions for construction sites, scaffolding protection, and weather-resistant building coverage.",
+      "Comprehensive shrinkwrap solutions for construction sites, scaffolding protection, and weather-resistant building coverage.",
     image: "/serviceimage/constructionservice.jpg",
     link: "/construction",
     color: "from-cyan-500 to-blue-400",
