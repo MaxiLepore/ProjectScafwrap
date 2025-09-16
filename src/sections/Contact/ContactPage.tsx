@@ -1,35 +1,65 @@
 // src/sections/Contact/ContactPage.tsx
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import emailjs from '@emailjs/browser';
+import { useFormValidation } from '@/hooks/useFormValidation';
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: "",
     email: "",
     phone: "",
     company: "",
     subject: "",
     message: ""
-  })
+  };
+
+  const {
+    formData,
+    errors,
+    updateField,
+    validateAll,
+    resetForm,
+    getFieldError,
+    isFieldValid,
+    isFormValid
+  } = useFormValidation(initialFormData);
+
   const [status, setStatus] = useState<null | 'success' | 'error'>(null);
   const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+
+  // Auto-hide success message after 5 seconds
+  useEffect(() => {
+    if (status === 'success') {
+      const timer = setTimeout(() => {
+        setStatus(null);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    const { name, value } = e.target;
+    updateField(name as keyof typeof formData, value);
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
+    setServerError(null);
+    
+    // Validate form before submission
+    if (!validateAll()) {
+      setLoading(false);
+      return;
+    }
     
     try {
-      // Validar en el servidor primero
+      // Server-side validation
       const validationResponse = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -39,11 +69,21 @@ export default function ContactPage() {
       if (!validationResponse.ok) {
         const errorData = await validationResponse.json();
         console.error('Validation error:', errorData);
+        
+        if (errorData.fieldErrors) {
+          // Handle field-specific errors from server
+          Object.keys(errorData.fieldErrors).forEach(field => {
+            updateField(field as keyof typeof formData, formData[field as keyof typeof formData]);
+          });
+        }
+        
+        setServerError(errorData.message || 'Please check the form and try again');
         setStatus('error');
+        setLoading(false);
         return;
       }
       
-      // Si pasa la validación, enviar con EmailJS
+      // If validation passes, send with EmailJS
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -57,18 +97,13 @@ export default function ContactPage() {
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
+      
       setStatus('success');
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        subject: "",
-        message: ""
-      });
+      resetForm();
     } catch (error) {
       setStatus('error');
-      console.error('Error de EmailJS:', error);
+      setServerError('Failed to send message. Please try again later.');
+      console.error('EmailJS error:', error);
     } finally {
       setLoading(false);
     }
@@ -156,31 +191,63 @@ export default function ContactPage() {
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Name *
                   </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors"
-                    placeholder="Please let us know your name"
-                  />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                        getFieldError('name') 
+                          ? 'border-red-500 bg-red-50' 
+                          : 'border-gray-300'
+                      }`}
+                      placeholder="Please enter your full name"
+                    />
+                    {isFieldValid('name') && formData.name && !getFieldError('name') && (
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {getFieldError('name') && (
+                    <p className="mt-1 text-sm text-red-600">{getFieldError('name')}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email *
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors"
-                    placeholder="Please let us know your email address"
-                  />
+                  <div className="relative">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                        getFieldError('email') 
+                          ? 'border-red-500 bg-red-50' 
+                          : 'border-gray-300'
+                      }`}
+                      placeholder="Please enter your email address"
+                    />
+                    {isFieldValid('email') && formData.email && !getFieldError('email') && (
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {getFieldError('email') && (
+                    <p className="mt-1 text-sm text-red-600">{getFieldError('email')}</p>
+                  )}
                 </div>
               </div>
 
@@ -189,29 +256,61 @@ export default function ContactPage() {
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                     Phone
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors"
-                    placeholder="Your phone number"
-                  />
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                        getFieldError('phone') 
+                          ? 'border-red-500 bg-red-50' 
+                          : 'border-gray-300'
+                      }`}
+                      placeholder="Your phone number (optional)"
+                    />
+                    {isFieldValid('phone') && formData.phone && !getFieldError('phone') && (
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {getFieldError('phone') && (
+                    <p className="mt-1 text-sm text-red-600">{getFieldError('phone')}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                     Company
                   </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors"
-                    placeholder="Your company name"
-                  />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                        getFieldError('company') 
+                          ? 'border-red-500 bg-red-50' 
+                          : 'border-gray-300'
+                      }`}
+                      placeholder="Your company name (optional)"
+                    />
+                    {isFieldValid('company') && formData.company && !getFieldError('company') && (
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {getFieldError('company') && (
+                    <p className="mt-1 text-sm text-red-600">{getFieldError('company')}</p>
+                  )}
                 </div>
               </div>
 
@@ -219,46 +318,113 @@ export default function ContactPage() {
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                   Subject *
                 </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors"
-                  placeholder="Please write a subject for your message"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                      getFieldError('subject') 
+                        ? 'border-red-500 bg-red-50' 
+                        : 'border-gray-300'
+                    }`}
+                    placeholder="Please enter a subject for your message"
+                  />
+                  {isFieldValid('subject') && formData.subject && !getFieldError('subject') && (
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                      <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                {getFieldError('subject') && (
+                  <p className="mt-1 text-sm text-red-600">{getFieldError('subject')}</p>
+                )}
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                   Message *
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={10}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors resize-none"
-                  placeholder="Please let us know your message"
-                />
+                <div className="relative">
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={10}
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors resize-none ${
+                      getFieldError('message') 
+                        ? 'border-red-500 bg-red-50' 
+                        : 'border-gray-300'
+                    }`}
+                    placeholder="Please enter your message"
+                  />
+                  {isFieldValid('message') && formData.message && !getFieldError('message') && (
+                    <div className="absolute top-3 right-3">
+                      <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                {getFieldError('message') && (
+                  <p className="mt-1 text-sm text-red-600">{getFieldError('message')}</p>
+                )}
+                <div className="mt-1 text-right text-sm text-gray-500">
+                  {formData.message.length}/1000 characters
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#36c6f4] hover:bg-[#2bb4e0] text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200"
-                disabled={loading}
+                className={`w-full font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center ${
+                  loading
+                    ? 'bg-[#36c6f4] bg-opacity-60 text-white cursor-not-allowed'
+                    : isFormValid
+                    ? 'bg-[#36c6f4] hover:bg-[#2bb4e0] text-white'
+                    : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                }`}
+                disabled={loading || !isFormValid}
               >
-                {loading ? 'Enviando...' : 'Send Message'}
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <span>Sending...</span>
+                  </div>
+                ) : (
+                  'Send Message'
+                )}
               </button>
+              
+              {/* Status Messages */}
               {status === 'success' && (
-                <p className="text-green-600 text-center font-semibold mt-2">Message sent successfully!</p>
+                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg animate-fadeIn">
+                  <p className="text-green-800 text-center font-semibold">
+                    ✓ Message sent successfully! We&apos;ll get back to you soon.
+                  </p>
+                </div>
               )}
+              
               {status === 'error' && (
-                <p className="text-red-600 text-center font-semibold mt-2">Hubo un error al enviar el mensaje. Intenta nuevamente.</p>
+                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 text-center font-semibold">
+                    {serverError || 'Failed to send message. Please try again.'}
+                  </p>
+                </div>
+              )}
+              
+              {/* Form validation summary */}
+              {Object.keys(errors).length > 0 && (
+                <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p className="text-yellow-800 text-sm">
+                    Please fix the errors above before submitting the form.
+                  </p>
+                </div>
               )}
             </form>
           </div>
