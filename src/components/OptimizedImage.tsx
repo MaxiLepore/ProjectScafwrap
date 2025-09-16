@@ -21,7 +21,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   alt,
   priority = false,
   className = "",
-  containerClassName = "relative overflow-hidden"
+  containerClassName = "relative overflow-hidden",
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -29,7 +29,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   // Usando el hook de optimización
   usePerformanceOptimization({
     enableImageLazyLoading: !priority,
-    preloadCriticalImages: priority
+    preloadCriticalImages: priority,
   });
 
   // Usando el servicio de optimización (Singleton)
@@ -38,23 +38,27 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   const handleLoad = () => {
     setIsLoaded(true);
-    logger.info('Image loaded successfully', { src, priority });
+    logger.info("Image loaded successfully", { src, priority });
     if (priority) {
       // Marcar como loaded para métricas de performance
       logger.performanceMark(`image-loaded-${src}`);
-      logger.performanceMeasure(`image-load-time-${src}`, `image-start-${src}`, `image-loaded-${src}`);
+      logger.performanceMeasure(
+        `image-load-time-${src}`,
+        `image-start-${src}`,
+        `image-loaded-${src}`
+      );
     }
   };
 
   const handleError = () => {
     setHasError(true);
-    logger.error('Failed to load image', { src, priority });
+    logger.error("Failed to load image", { src, priority });
   };
 
   const handleLoadingComplete = () => {
     // Callback adicional cuando la imagen está completamente cargada
     logger.performanceMark(`image-complete-${src}`);
-    logger.info('Image loading completed', { src });
+    logger.info("Image loading completed", { src });
   };
 
   return (
@@ -62,15 +66,16 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       <Image
         {...imageProps}
         className={`transition-all duration-300 ${
-          isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
         } hover:scale-105 ${className}`}
         onLoad={handleLoad}
         onError={handleError}
         onLoadingComplete={handleLoadingComplete}
+        alt={imageProps.alt || alt}
         style={{
           ...imageProps.style,
           // Agregar estilos de optimización
-          willChange: isLoaded ? 'auto' : 'transform',
+          willChange: isLoaded ? "auto" : "transform",
         }}
       />
       {hasError && (

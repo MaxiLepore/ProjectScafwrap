@@ -63,9 +63,12 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Contact
-          </h1>
+          <div className="relative inline-block mb-6">
+            <h1 className="text-4xl md:text-7xl font-bold text-gray-800 font-heading tracking-wide">
+              CONTACT
+            </h1>
+            <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full absolute left-0 -bottom-3"></div>
+          </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Get in touch and let us give you a free no-obligation quote.
           </p>

@@ -138,6 +138,7 @@ export const Footer = () => {
                 width={60}
                 height={20}
                 className="object-contain rounded"
+                style={{ height: 'auto', width: 'auto' }}
               />
             </div>
           </div>

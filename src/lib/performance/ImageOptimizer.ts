@@ -1,4 +1,6 @@
 // src/lib/performance/ImageOptimizer.ts
+import type { CSSProperties } from 'react';
+import type { ImageProps } from 'next/image';
 export class ImageOptimizer {
   private static instance: ImageOptimizer;
   
@@ -12,13 +14,13 @@ export class ImageOptimizer {
   }
   
   // Single Responsibility: Solo optimiza imágenes
-  public getOptimizedImageProps(src: string, alt: string, priority = false) {
+  public getOptimizedImageProps(src: string, alt: string, priority = false): ImageProps {
     // Marcar inicio de carga para métricas
     if (priority) {
       performance.mark(`image-start-${src}`);
     }
 
-    return {
+    const props: ImageProps = {
       src,
       alt,
       fill: true,
@@ -30,6 +32,8 @@ export class ImageOptimizer {
       loading: priority ? 'eager' as const : 'lazy' as const,
       // Agregar optimizaciones adicionales
       unoptimized: false,
+      // Asegurar que exista style para permitir spreads seguros aguas abajo
+      style: {} as CSSProperties,
       onLoad: () => {
         if (priority) {
           performance.mark(`image-loaded-${src}`);
@@ -41,6 +45,8 @@ export class ImageOptimizer {
         }
       }
     };
+
+    return props;
   }
   
   private getResponsiveSizes(): string {

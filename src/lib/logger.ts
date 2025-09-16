@@ -5,7 +5,7 @@ interface LogEntry {
   level: LogLevel;
   message: string;
   timestamp: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
 }
 
 class Logger {
@@ -23,7 +23,7 @@ class Logger {
     return Logger.instance;
   }
 
-  private log(level: LogLevel, message: string, context?: Record<string, any>): void {
+  private log(level: LogLevel, message: string, context?: Record<string, unknown>): void {
     const entry: LogEntry = {
       level,
       message,
@@ -40,28 +40,28 @@ class Logger {
     // En producción, podrías enviar logs a un servicio externo
     if (!this.isDevelopment && level === 'error') {
       // Aquí podrías integrar con servicios como Sentry, LogRocket, etc.
-      this.sendToExternalService(entry);
+  this.sendToExternalService();
     }
   }
 
-  private sendToExternalService(entry: LogEntry): void {
+  private sendToExternalService(): void {
     // Implementar envío a servicio externo si es necesario
     // Por ejemplo: Sentry, LogRocket, DataDog, etc.
   }
 
-  public debug(message: string, context?: Record<string, any>): void {
+  public debug(message: string, context?: Record<string, unknown>): void {
     this.log('debug', message, context);
   }
 
-  public info(message: string, context?: Record<string, any>): void {
+  public info(message: string, context?: Record<string, unknown>): void {
     this.log('info', message, context);
   }
 
-  public warn(message: string, context?: Record<string, any>): void {
+  public warn(message: string, context?: Record<string, unknown>): void {
     this.log('warn', message, context);
   }
 
-  public error(message: string, context?: Record<string, any>): void {
+  public error(message: string, context?: Record<string, unknown>): void {
     this.log('error', message, context);
   }
 
@@ -77,12 +77,13 @@ class Logger {
     if (typeof window !== 'undefined' && 'performance' in window) {
       try {
         performance.measure(name, startMark, endMark);
-        const measure = performance.getEntriesByName(name)[0];
+        const measure = performance.getEntriesByName(name)[0] as PerformanceEntry | undefined;
+        if (!measure) return;
         this.info(`Performance measure: ${name}`, {
           duration: measure.duration,
           startTime: measure.startTime,
         });
-      } catch (error) {
+      } catch (error: unknown) {
         this.warn(`Failed to measure performance: ${name}`, { error });
       }
     }

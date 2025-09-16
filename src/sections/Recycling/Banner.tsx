@@ -50,6 +50,7 @@ export default function Banner() {
                   src={image.src}
                   alt={image.alt}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition duration-300 group-hover:brightness-75"
                 />
                 {/* Ícono de lupa al hacer hover */}

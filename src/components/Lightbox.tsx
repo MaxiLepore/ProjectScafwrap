@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Image from "next/image";
 
 interface LightboxProps {
@@ -12,7 +12,15 @@ interface LightboxProps {
 const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) => {
   const [current, setCurrent] = React.useState(initialIndex);
 
-  // Cerrar con Escape
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const prev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  // Cerrar con Escape y navegación con teclado
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -21,10 +29,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [current]);
-
-  const next = () => setCurrent((prev) => (prev + 1) % images.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  }, [next, prev, onClose]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
