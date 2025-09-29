@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
     images: [
       {
-        url: "/images/scafwrap-og-image.jpg",
+        url: "/images/construction.jpg",
         width: 1200,
         height: 630,
         alt: "Scafwrap - professional shrinkwrap for yachts, boats, and construction in Auckland"
@@ -170,7 +170,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   "name": "Scafwrap New Zealand",
                   "image": {
                     "@type": "ImageObject",
-                    "url": "https://scafwrap.co.nz/images/logo.png",
+                    "url": "https://scafwrap.co.nz/logoScafwrap.jpeg",
                     "width": 400,
                     "height": 300
                   },
@@ -189,6 +189,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   "url": "https://scafwrap.co.nz",
                   "telephone": "+64-XXX-XXXX",
                   "priceRange": "$$",
+                  "sameAs": [
+                    "https://www.facebook.com/scafwrap/",
+                    "https://www.linkedin.com/company/scafwrap-limited/"
+                  ],
                   "serviceArea": {
                     "@type": "State",
                     "name": "New Zealand"
@@ -233,6 +237,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     "target": "https://scafwrap.co.nz/search?q={search_term_string}",
                     "query-input": "required name=search_term_string"
                   }
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "name": ["Home", "Marine", "Construction", "Reclads", "Recycling", "Contact"],
+                  "url": [
+                    "https://scafwrap.co.nz/",
+                    "https://scafwrap.co.nz/marine",
+                    "https://scafwrap.co.nz/construction",
+                    "https://scafwrap.co.nz/reclads",
+                    "https://scafwrap.co.nz/recycling",
+                    "https://scafwrap.co.nz/contact"
+                  ]
                 }
               ]
             })

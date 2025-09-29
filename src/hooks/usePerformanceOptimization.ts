@@ -50,8 +50,7 @@ export const usePerformanceOptimization = (config: PerformanceConfig = {}) => {
 
     const criticalImages = [
       '/images/marine.jpg',
-      '/images/construction.jpg',
-      '/images/PequeLogo.png'
+      '/images/construction.jpg'
     ];
 
     criticalImages.forEach((src) => {

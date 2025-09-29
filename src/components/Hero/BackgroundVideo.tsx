@@ -5,7 +5,6 @@ import { logger } from '@/lib/logger'
 
 interface BackgroundVideoProps {
   src: string
-  poster?: string
   onVideoLoad?: () => void
   onVideoError?: () => void
   className?: string
@@ -13,7 +12,6 @@ interface BackgroundVideoProps {
 
 export const BackgroundVideo = ({ 
   src, 
-  poster, 
   onVideoLoad, 
   onVideoError,
   className = '' 
@@ -75,7 +73,6 @@ export const BackgroundVideo = ({
         loop
         playsInline
         preload="metadata"
-        poster={poster}
         onLoadedData={handleVideoLoad}
         onError={handleVideoError}
         onCanPlayThrough={handleCanPlayThrough}

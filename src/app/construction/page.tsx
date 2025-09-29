@@ -1,5 +1,6 @@
 // src/app/construction/page.tsx
 import Banner from "@/sections/Construction/Banner"
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description: "Professional construction shrinkwrap services in Auckland. Weatherproofing, scaffolding protection, and building site enclosures.",
     images: [
       {
-        url: "/images/construction-og-image.jpg",
+        url: "/images/construction.jpg",
         width: 1200,
         height: 630,
         alt: "Construction shrinkwrap services Auckland - scaffolding and building protection"
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     site: "@scafwrapnz",
     title: "Construction Shrinkwrap Auckland | Scafwrap NZ",
     description: "Professional construction shrinkwrap services in Auckland. Weatherproofing, scaffolding protection, and building site enclosures.",
-    images: ["/images/construction-og-image.jpg"]
+  images: ["/images/construction.jpg"]
   },
   alternates: {
     canonical: "https://scafwrap.co.nz/construction"
@@ -44,6 +45,12 @@ export const metadata: Metadata = {
 export default function ConstructionPage() {
   return (
     <main>
+      <BreadcrumbJsonLd
+        crumbs={[
+          { name: "Home", item: "/" },
+          { name: "Construction", item: "/construction" }
+        ]}
+      />
       <Banner />
     </main>
   );

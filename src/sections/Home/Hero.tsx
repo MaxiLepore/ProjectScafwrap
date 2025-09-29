@@ -88,7 +88,6 @@ export default function Hero() {
       {/* Video de fondo optimizado */}
       <BackgroundVideo
         src="/video/videohome.MP4"
-        poster="/images/hero/Marine.jpg"
         onVideoLoad={handleVideoLoad}
         onVideoError={handleVideoError}
       />

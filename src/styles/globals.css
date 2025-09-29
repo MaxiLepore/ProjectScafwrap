@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-@theme {
-    --color-primary: #00AEEF;   
-    --color-secondary: #008CD2;  
-    --color-textDark: #1E1E1E;  
-    --color-grayText: #666666; 
+:root {
+  --color-primary: #00AEEF;
+  --color-secondary: #008CD2;
+  --color-textDark: #1E1E1E;
+  --color-grayText: #666666;
 
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Istok Web', sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Istok Web', sans-serif;
 }
 
 /* Page Transition Animations */
@@ -330,4 +330,13 @@
 /* Border width utilities optimizadas */
 .border-1 {
   border-width: 1px;
+}
+
+/* Font utilities mapped to next/font variables */
+.font-heading {
+  font-family: var(--font-montserrat), var(--font-heading), system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-istok), var(--font-body), system-ui, sans-serif;
 }

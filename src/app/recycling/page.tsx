@@ -1,6 +1,7 @@
 // src/app/recycling/page.tsx
 import type { Metadata } from "next"
 import Banner from "@/sections/Recycling/Banner"
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
   title: "Recycling & Sustainability Auckland | Scafwrap NZ",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     description: "Professional recycling and environmental services in Auckland. Eco-friendly waste management and sustainable practices for marine and construction industries.",
     images: [
       {
-        url: "/images/recycling-og-image.jpg",
+        url: "/images/recycling.jpg",
         width: 1200,
         height: 630,
         alt: "Recycling and environmental services Auckland - ScafWrap"
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     site: "@scafwrapnz",
     title: "Recycling & Sustainability Auckland | Scafwrap NZ",
     description: "Professional recycling and environmental services in Auckland. Eco-friendly waste management and sustainable practices for marine and construction industries.",
-    images: ["/images/recycling-og-image.jpg"]
+  images: ["/images/recycling.jpg"]
   },
   alternates: {
     canonical: "https://scafwrap.co.nz/recycling"
@@ -43,6 +44,12 @@ export const metadata: Metadata = {
 export default function RecyclingPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        crumbs={[
+          { name: "Home", item: "/" },
+          { name: "Recycling", item: "/recycling" }
+        ]}
+      />
       <Banner />
     </>
   )

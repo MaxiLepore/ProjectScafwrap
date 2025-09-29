@@ -1,6 +1,7 @@
 // src/app/reclads/page.tsx
 import type { Metadata } from "next"
 import Banner from "@/sections/Reclads/Banner"
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd"
 
 export const metadata: Metadata = {
   title: "Reclad & Weathertightness Auckland | Scafwrap NZ",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     description: "Expert building reclad and weathertightness solutions in Auckland. Residential & commercial upgrades, leaky building repairs, and heritage restoration.",
     images: [
       {
-        url: "/images/reclads-og.jpg",
+        url: "/images/reclads.jpg",
         width: 1200,
         height: 630,
         alt: "ScafWrap professional reclad and building envelope services Auckland"
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     site: "@scafwrapnz",
     title: "Reclad & Weathertightness Auckland | Scafwrap NZ",
     description: "Expert building reclad and weathertightness solutions in Auckland. Residential & commercial upgrades, leaky building repairs, and heritage restoration.",
-    images: ["/images/reclads-og.jpg"]
+  images: ["/images/reclads.jpg"]
   },
   alternates: {
     canonical: "https://scafwrap.co.nz/reclads"
@@ -44,6 +45,12 @@ export const metadata: Metadata = {
 export default function RecladsPage() {
   return (
     <div>
+      <BreadcrumbJsonLd
+        crumbs={[
+          { name: "Home", item: "/" },
+          { name: "Reclads", item: "/reclads" }
+        ]}
+      />
       <Banner />
     </div>
   )

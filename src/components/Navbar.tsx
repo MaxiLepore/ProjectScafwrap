@@ -5,6 +5,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import TransitionLink from "@/components/TransitionLink"
 import { usePageTransitionContext } from "@/components/PageTransition/PageTransitionProvider"
 
 const navItems = [
@@ -30,13 +31,7 @@ export const Navbar = () => {
     }, 200)
   }
 
-  // Función para manejar navegación en desktop con transición
-  const handleDesktopNavigation = async (e: React.MouseEvent, href: string) => {
-    e.preventDefault()
-    if (!isLoading) {
-      await transitionTo(href)
-    }
-  }
+  // Navegación en desktop ahora la gestiona TransitionLink
 
   // Variantes de animación para el menú
   const menuVariants = {
@@ -99,9 +94,9 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-start justify-between">
         {/* Izquierda: Logo con espacio rectangular */}
         <div className="flex items-center w-[180px] sm:w-2/5">
-          <button
-            onClick={(e) => handleDesktopNavigation(e, "/")}
-            disabled={isLoading}
+          <TransitionLink
+            href="/"
+            ariaLabel="Go to homepage"
             className={`relative w-[140px] h-[48px] sm:w-[260px] sm:h-[80px] ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
             <Image
@@ -112,7 +107,7 @@ export const Navbar = () => {
               className="object-contain hover:opacity-90 transition-opacity duration-200"
               priority
             />
-          </button>
+          </TransitionLink>
         </div>
         {/* Desktop: Número y secciones */}
         <div className="hidden sm:flex flex-col w-3/5 items-end">
@@ -123,19 +118,18 @@ export const Navbar = () => {
             {navItems.map((item) => {
               const isActive = pathname === item.href
               return (
-                <button
+                <TransitionLink
                   key={item.href}
-                  onClick={(e) => handleDesktopNavigation(e, item.href)}
-                  disabled={isLoading || isActive}
+                  href={item.href}
                   className={`relative text-xs md:text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200
                     ${isActive ? "text-[#00AEEF]" : "text-[#1E1E1E]"}
-                    ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:text-[#00BFFF] cursor-pointer"}`}
+                    ${isLoading ? "pointer-events-none opacity-50" : "hover:text-[#00BFFF] cursor-pointer"}`}
                 >
                   {item.label}
                   {isActive && (
                     <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"></span>
                   )}
-                </button>
+                </TransitionLink>
               )
             })}
           </nav>

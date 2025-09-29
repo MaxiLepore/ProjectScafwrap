@@ -1,4 +1,5 @@
 import Banner from "@/sections/Marine/Banner"
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     description: "Professional marine shrink wrap services in Auckland. Protection for yachts, boats, and marine facilities. Weatherproofing and transport solutions.",
     images: [
       {
-        url: "/images/marine-og-image.jpg",
+        url: "/images/marine.jpg",
         width: 1200,
         height: 630,
         alt: "Marine shrink wrap services Auckland - yacht and boat wrapping"
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     site: "@scafwrapnz",
     title: "Marine Shrink Wrap Auckland | ScafWrap NZ",
     description: "Professional marine shrink wrap services in Auckland. Protection for yachts, boats, and marine facilities. Weatherproofing and transport solutions.",
-    images: ["/images/marine-og-image.jpg"]
+  images: ["/images/marine.jpg"]
   },
   alternates: {
     canonical: "https://scafwrap.co.nz/marine"
@@ -43,6 +44,12 @@ export const metadata: Metadata = {
 export default function MarinePage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        crumbs={[
+          { name: "Home", item: "/" },
+          { name: "Marine", item: "/marine" }
+        ]}
+      />
       <Banner />
     </>
   )

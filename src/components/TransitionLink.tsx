@@ -1,7 +1,8 @@
-'use client'
+"use client"
 
-import { ReactNode } from 'react'
-import { usePageTransitionContext } from '@/components/PageTransition/PageTransitionProvider'
+import { ReactNode } from "react"
+import Link from "next/link"
+import { usePageTransitionContext } from "@/components/PageTransition/PageTransitionProvider"
 
 interface TransitionLinkProps {
   href: string
@@ -9,40 +10,50 @@ interface TransitionLinkProps {
   className?: string
   disabled?: boolean
   onClick?: () => void
+  target?: string
+  rel?: string
+  ariaLabel?: string
 }
 
-export default function TransitionLink({ 
-  href, 
-  children, 
-  className = "", 
+// Renders a real anchor for SEO/accessibility and intercepts clicks for animated transitions
+export default function TransitionLink({
+  href,
+  children,
+  className = "",
   disabled = false,
-  onClick 
+  onClick,
+  target,
+  rel,
+  ariaLabel
 }: TransitionLinkProps) {
   const { transitionTo, isLoading } = usePageTransitionContext()
 
-  const handleClick = async (e: React.MouseEvent) => {
-    e.preventDefault()
-    
-    if (disabled || isLoading) return
-    
-    if (onClick) {
-      onClick()
+  const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Allow default behavior for modifier keys (open in new tab, copy link, etc.)
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || target === "_blank") {
+      return
     }
-    
+
+    e.preventDefault()
+
+    if (disabled || isLoading) return
+
+    onClick?.()
     await transitionTo(href)
   }
 
+  const disabledClasses = isLoading || disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+
   return (
-    <button
+    <Link
+      href={href}
       onClick={handleClick}
-      disabled={disabled || isLoading}
-      className={`${className} ${
-        isLoading || disabled 
-          ? "opacity-50 cursor-not-allowed" 
-          : "cursor-pointer"
-      }`}
+      target={target}
+      rel={rel}
+      aria-label={ariaLabel}
+      className={`${className} ${disabledClasses}`}
     >
       {children}
-    </button>
+    </Link>
   )
 }
