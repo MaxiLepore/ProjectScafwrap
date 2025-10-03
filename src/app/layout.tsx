@@ -29,7 +29,7 @@ const istok = Istok_Web({
 export const metadata: Metadata = {
   metadataBase: new URL('https://scafwrap.co.nz'),
   title: "Scafwrap | Specialist Weather Proofing & Containment Solutions",
-  description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads. Free quotes. Call 0800 722 397.",
+  description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads.",
   keywords: [
     "shrink wrap Auckland", "marine shrink wrap NZ", "yacht wrapping Auckland", 
     "construction weatherproofing", "scaffolding wrap", "boat shrink wrap", 
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     url: "https://scafwrap.co.nz",
     siteName: "Scafwrap New Zealand",
     title: "Scafwrap | Specialist Weather Proofing & Containment Solutions",
-    description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads. Free quotes. Call 0800 722 397.",
+    description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads.",
     images: [
       {
         url: "/images/construction.jpg",
