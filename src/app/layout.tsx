@@ -28,8 +28,8 @@ const istok = Istok_Web({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://scafwrap.co.nz'),
-  title: "Scafwrap NZ | Shrinkwrap Auckland - Marine & Construction Weatherproofing",
-  description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+  title: "Scafwrap | Specialist Weather Proofing & Containment Solutions",
+  description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads. Free quotes. Call 0800 722 397.",
   keywords: [
     "shrink wrap Auckland", "marine shrink wrap NZ", "yacht wrapping Auckland", 
     "construction weatherproofing", "scaffolding wrap", "boat shrink wrap", 
@@ -64,8 +64,8 @@ export const metadata: Metadata = {
     locale: "en_NZ",
     url: "https://scafwrap.co.nz",
     siteName: "Scafwrap New Zealand",
-    title: "Scafwrap NZ | Shrinkwrap Auckland - Marine & Construction Weatherproofing",
-    description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+    title: "Scafwrap | Specialist Weather Proofing & Containment Solutions",
+    description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads. Free quotes. Call 0800 722 397.",
     images: [
       {
         url: "/images/construction.jpg",
@@ -78,8 +78,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@scafwrapnz",
-    title: "Scafwrap NZ | Shrinkwrap Auckland - Marine & Construction Weatherproofing",
-    description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
+    title: "Scafwrap NZ | Auckland Shrinkwrap Specialists",
+    description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads. Free quotes. Call 0800 722 397.",
     images: ["/images/scafwrap-og-image.jpg"]
   },
   category: "Business Services",
@@ -159,13 +159,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   "@type": "LocalBusiness",
                   "@id": "https://scafwrap.co.nz/#business",
                   "name": "Scafwrap New Zealand",
+                  "alternateName": "Scafwrap NZ",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://scafwrap.co.nz/logoScafwrap.jpeg",
+                    "width": 400,
+                    "height": 300
+                  },
                   "image": {
                     "@type": "ImageObject",
                     "url": "https://scafwrap.co.nz/logoScafwrap.jpeg",
                     "width": 400,
                     "height": 300
                   },
-                  "description": "Professional shrinkwrap services for marine and construction applications in Auckland, New Zealand",
+                  "description": "Auckland's leading shrinkwrap specialists providing professional weatherproofing for marine, construction, and building applications throughout New Zealand",
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Auckland",
