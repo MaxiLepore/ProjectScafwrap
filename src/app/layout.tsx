@@ -82,20 +82,11 @@ export const metadata: Metadata = {
     description: "Shrinkwrap specialists in Auckland. Professional protection for yachts, boats, scaffolding, and construction sites. Weatherproof and sustainable solutions in New Zealand.",
     images: ["/images/scafwrap-og-image.jpg"]
   },
-  alternates: {
-    canonical: "https://scafwrap.co.nz"
-  },
   category: "Business Services",
   classification: "Marine and Construction Services",
   referrer: "origin-when-cross-origin",
   verification: {
-    // 🔧 PASO 1: Reemplaza estos códigos con tus códigos reales de verificación
-    // Google Search Console: https://search.google.com/search-console
-    google: "REEMPLAZA_CON_TU_CODIGO_GOOGLE_AQUI",
-    other: {
-      // Bing Webmaster Tools: https://www.bing.com/webmasters
-      "msvalidate.01": "REEMPLAZA_CON_TU_CODIGO_BING_AQUI",
-    },
+    google: "hCXuWlL4pDm1LOqZJusDxK4FzmXPZyzxNZdyUNaoqxk",
   },
   other: {
     "mobile-web-app-capable": "yes",
@@ -187,7 +178,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     "longitude": 174.7633
                   },
                   "url": "https://scafwrap.co.nz",
-                  "telephone": "+64-XXX-XXXX",
+                  "telephone": "0800722397",
                   "priceRange": "$$",
                   "sameAs": [
                     "https://www.facebook.com/scafwrap/",
@@ -255,10 +246,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         
-        {/* Sitemap and Alternates */}
+        {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="alternate" hrefLang="en-nz" href="https://scafwrap.co.nz" />
-        <link rel="alternate" hrefLang="en" href="https://scafwrap.co.nz" />
       </head>
       <body className="font-sans bg-white text-gray-900">
         <PageTransitionProvider>
