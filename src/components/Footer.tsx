@@ -1,6 +1,7 @@
 // src/components/Footer.tsx
 import Image from "next/image";
 import TransitionLink from "@/components/TransitionLink";
+import Link from 'next/link';
 
 export const Footer = () => {
   return (
@@ -132,14 +133,16 @@ export const Footer = () => {
             </span>
             <div className="flex items-center gap-2 text-center">
               <span>Designed by</span>
-              <Image
-                src="/logoMateStudio.jpeg"
-                alt="Mate Studio"
-                width={60}
-                height={20}
-                className="object-contain rounded"
-                style={{ height: 'auto', width: 'auto' }}
-              />
+              <Link href="https://matestudio.co.nz/en" target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="/logoMateStudio.jpeg"
+                  alt="Mate Studio"
+                  width={60}
+                  height={20}
+                  className="object-contain rounded cursor-pointer hover:opacity-80 transition-opacity"
+                  style={{ height: 'auto', width: 'auto' }}
+                />
+              </Link>
             </div>
           </div>
         </div>
