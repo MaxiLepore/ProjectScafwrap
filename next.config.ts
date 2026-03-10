@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   generateEtags: false,
 
+  // Tree-shake barrel imports for large packages
+  experimental: {
+    optimizePackageImports: ['framer-motion']
+  },
+
   // Headers de seguridad y caching
   async headers() {
     return [

@@ -2,7 +2,7 @@
 // src/sections/Recycling/Banner.tsx
 import Image from "next/image";
 import RecyclingInfo from "./RecyclingInfo";
-import React, { useState } from "react";
+import { useState } from "react";
 import Lightbox from "@/components/Lightbox";
 
 export default function Banner() {

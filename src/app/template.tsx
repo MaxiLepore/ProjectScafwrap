@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 interface TemplateProps {
   children: ReactNode
@@ -31,9 +30,28 @@ const pageTransition = {
   duration: 0.4
 }
 
+// Cache module reference to avoid re-importing on each navigation
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let MotionDivCached: any = null
+
 export default function Template({ children }: TemplateProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [MotionDiv, setMotionDiv] = useState<any>(MotionDivCached)
+
+  useEffect(() => {
+    if (MotionDivCached) return
+    import('framer-motion').then(mod => {
+      MotionDivCached = mod.motion.div
+      setMotionDiv(() => mod.motion.div)
+    })
+  }, [])
+
+  if (!MotionDiv) {
+    return <div className="w-full">{children}</div>
+  }
+
   return (
-    <motion.div
+    <MotionDiv
       initial="initial"
       animate="in"
       exit="out"
@@ -42,6 +60,6 @@ export default function Template({ children }: TemplateProps) {
       className="w-full"
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   )
 }

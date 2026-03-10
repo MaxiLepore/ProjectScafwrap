@@ -2,7 +2,7 @@
 // src/sections/Marine/Banner.tsx
 import Image from "next/image";
 import MarineInfo from "./MarineInfo";
-import React, { useState } from "react";
+import { useState } from "react";
 import Lightbox from "@/components/Lightbox";
 
 export default function Banner() {

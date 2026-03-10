@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next"
 import { ReactNode } from "react"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
-import PageTransitionProvider from "@/components/PageTransition/PageTransitionProvider"
 
 import { Montserrat, Istok_Web } from "next/font/google"
 
@@ -42,8 +41,7 @@ export const metadata: Metadata = {
   publisher: "Scafwrap New Zealand",
   icons: {
     icon: [
-      { url: "/logoScafwrap.jpeg", type: "image/jpeg" },
-      { url: "/favicon.ico", sizes: "any" }
+      { url: "/logoScafwrap.jpeg", type: "image/jpeg" }
     ],
     shortcut: "/logoScafwrap.jpeg",
     apple: "/logoScafwrap.jpeg",
@@ -80,7 +78,7 @@ export const metadata: Metadata = {
     site: "@scafwrapnz",
     title: "Scafwrap NZ | Auckland Shrinkwrap Specialists",
     description: "Auckland's leading shrinkwrap specialists. Professional weatherproofing for yachts, boats, construction, scaffolding and building reclads. Free quotes. Call 0800 722 397.",
-    images: ["/images/scafwrap-og-image.jpg"]
+    images: ["/images/construction.jpg"]
   },
   category: "Business Services",
   classification: "Marine and Construction Services",
@@ -115,17 +113,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${montserrat.variable} ${istok.variable}`}
     >
       <head>
-        {/* Favicon and App Icons */}
-        <link rel="icon" href="/logoScafwrap.jpeg" type="image/jpeg" sizes="any" />
-        <link rel="shortcut icon" href="/logoScafwrap.jpeg" />
-        <link rel="apple-touch-icon" href="/logoScafwrap.jpeg" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/logoScafwrap.jpeg" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="msapplication-TileImage" content="/logoScafwrap.jpeg" />
-        <meta name="msapplication-TileColor" content="#00AEEF" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-        <meta name="theme-color" content="#00AEEF" />
-        <meta name="google-site-verification" content="hCXuWlL4pDm1LOqZJusDxK4FzmXPZyzxNZdyUNaoqxk" />
         
         {/* Critical Resource Hints - Load First */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -214,6 +203,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                           "name": "Construction Weatherproofing",
                           "description": "Scaffolding and construction site weather protection"
                         }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Building Reclads",
+                          "description": "Shrinkwrap containment and weather protection for building reclad projects"
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Recycling",
+                          "description": "Shrinkwrap recycling and sustainable waste management services"
+                        }
                       }
                     ]
                   },
@@ -229,11 +234,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   "description": "Professional shrinkwrap services for marine and construction",
                   "publisher": {
                     "@id": "https://scafwrap.co.nz/#business"
-                  },
-                  "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://scafwrap.co.nz/search?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
                   }
                 },
                 {
@@ -257,11 +257,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
       </head>
       <body className="font-sans bg-white text-gray-900">
-        <PageTransitionProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </PageTransitionProvider>
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   )

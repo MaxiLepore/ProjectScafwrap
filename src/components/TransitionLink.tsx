@@ -2,7 +2,6 @@
 
 import { ReactNode } from "react"
 import Link from "next/link"
-import { usePageTransitionContext } from "@/components/PageTransition/PageTransitionProvider"
 
 interface TransitionLinkProps {
   href: string
@@ -15,7 +14,7 @@ interface TransitionLinkProps {
   ariaLabel?: string
 }
 
-// Renders a real anchor for SEO/accessibility and intercepts clicks for animated transitions
+// Renders a real anchor for SEO/accessibility with optional disabled behavior
 export default function TransitionLink({
   href,
   children,
@@ -26,23 +25,18 @@ export default function TransitionLink({
   rel,
   ariaLabel
 }: TransitionLinkProps) {
-  const { transitionTo, isLoading } = usePageTransitionContext()
-
-  const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Allow default behavior for modifier keys (open in new tab, copy link, etc.)
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || target === "_blank") {
       return
     }
 
-    e.preventDefault()
-
-    if (disabled || isLoading) return
+    if (disabled) {
+      e.preventDefault()
+      return
+    }
 
     onClick?.()
-    await transitionTo(href)
   }
-
-  const disabledClasses = isLoading || disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
 
   return (
     <Link
@@ -51,7 +45,7 @@ export default function TransitionLink({
       target={target}
       rel={rel}
       aria-label={ariaLabel}
-      className={`${className} ${disabledClasses}`}
+      className={`${className} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
     >
       {children}
     </Link>

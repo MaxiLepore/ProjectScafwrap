@@ -40,6 +40,15 @@ const slides = [
   },
 ] as const;
 
+// Hoisted handlers — only log, no dependency on component state
+const handleVideoLoad = () => {
+  logger.info('Hero section video loaded successfully');
+};
+
+const handleVideoError = () => {
+  logger.warn('Hero section video failed to load, using fallback content');
+};
+
 export default function Hero() {
   // Hook personalizado para manejar el carrusel
   const {
@@ -66,18 +75,8 @@ export default function Hero() {
     threshold: 50
   });
 
-  // Manejar carga del video
-  const handleVideoLoad = () => {
-    logger.info('Hero section video loaded successfully');
-  };
-
-  // Manejar errores del video
-  const handleVideoError = () => {
-    logger.warn('Hero section video failed to load, using fallback content');
-  };
-
   return (
-    <section 
+    <section
       className="relative w-full xs:h-[85vh] sm:h-[85vh] lg:h-[90vh] overflow-hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -87,7 +86,7 @@ export default function Hero() {
     >
       {/* Video de fondo optimizado */}
       <BackgroundVideo
-        src="/video/videohome.MP4"
+        src="/video/videohome.mp4"
         onVideoLoad={handleVideoLoad}
         onVideoError={handleVideoError}
       />
@@ -115,128 +114,6 @@ export default function Hero() {
         onSlideChange={goToSlide}
         className="bottom-2 sm:bottom-4 lg:bottom-8"
       />
-      {/* Estilos globales mejorados para el componente Hero */}
-      <style jsx global>{`
-        .clip-top-left-triangle {
-          clip-path: polygon(0 0, 100% 0, 0 100%);
-          filter: drop-shadow(0 4px 12px rgba(34, 211, 238, 0.4));
-        }
-        .clip-bottom-right-triangle {
-          clip-path: polygon(100% 100%, 100% 0, 0 100%);
-          filter: drop-shadow(0 -4px 12px rgba(34, 211, 238, 0.4));
-        }
-        
-        /* Optimizaciones para video de fondo */
-        video {
-          will-change: transform;
-          transform: translateZ(0);
-          backface-visibility: hidden;
-        }
-        
-        /* Animaciones mejoradas para slides de texto */
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        /* Mejoras específicas para mobile */
-        @media (max-width: 640px) {
-          video {
-            object-position: center center;
-          }
-          
-          .animate-fade-in-up {
-            animation-duration: 0.6s;
-          }
-          
-          /* Mejorar touch targets */
-          button {
-            min-height: 44px;
-            min-width: 44px;
-          }
-          
-          /* Mejorar legibilidad del texto */
-          h1 {
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-          }
-          
-          p {
-            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
-          }
-          
-          /* Evitar problemas con viewport height */
-          section {
-            min-height: 100vh;
-            min-height: 100dvh; /* Dynamic viewport height para iOS */
-          }
-        }
-        
-        /* Optimizaciones para tablet */
-        @media (min-width: 641px) and (max-width: 1024px) {
-          video {
-            object-position: center center;
-          }
-          
-          /* Mejorar spacing en tablets */
-          section {
-            padding-bottom: env(safe-area-inset-bottom);
-          }
-        }
-        
-        /* Optimizaciones para desktop */
-        @media (min-width: 1025px) {
-          video {
-            object-position: right center;
-          }
-          
-          .animate-fade-in-up {
-            animation-duration: 1s;
-          }
-        }
-        
-        /* Mejoras de accesibilidad */
-        @media (prefers-reduced-motion: reduce) {
-          .animate-fade-in-up {
-            animation: none;
-            opacity: 1;
-            transform: none;
-          }
-          
-          .animate-pulse-slow {
-            animation: none;
-            opacity: 0.6;
-          }
-        }
-        
-        /* Optimizaciones para conexiones lentas */
-        @media (prefers-reduced-data: reduce) {
-          video {
-            display: none;
-          }
-          
-          .animate-pulse-slow {
-            animation: none;
-            opacity: 0.7;
-          }
-        }
-        
-        /* Mejoras para modo oscuro */
-        @media (prefers-color-scheme: dark) {
-          .animate-fade-in-up {
-            animation-duration: 0.7s;
-          }
-        }
-      `}</style>
     </section>
   );
 }

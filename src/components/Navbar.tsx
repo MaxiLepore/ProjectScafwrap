@@ -2,11 +2,10 @@
 "use client"
 
 import Image from "next/image"
-import { usePathname } from "next/navigation"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import TransitionLink from "@/components/TransitionLink"
-import { usePageTransitionContext } from "@/components/PageTransition/PageTransitionProvider"
 
 const navItems = [
   { label: "HOME", href: "/" },
@@ -17,76 +16,69 @@ const navItems = [
   { label: "CONTACT", href: "/contact" },
 ]
 
+// Hoisted animation variants (static, don't depend on props/state)
+const menuVariants = {
+  closed: {
+    opacity: 0,
+    height: 0
+  },
+  open: {
+    opacity: 1,
+    height: "auto"
+  }
+}
+
+const itemVariants = {
+  closed: {
+    opacity: 0,
+    x: 20
+  },
+  open: {
+    opacity: 1,
+    x: 0
+  }
+}
+
+const containerVariants = {
+  closed: {
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1
+    }
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.1
+    }
+  }
+}
+
+const hamburgerVariants = {
+  closed: {
+    rotate: 0,
+    transition: {
+      duration: 0.2
+    }
+  },
+  open: {
+    rotate: 180,
+    transition: {
+      duration: 0.2
+    }
+  }
+}
+
 export const Navbar = () => {
   const pathname = usePathname()
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
-  const { transitionTo, isLoading } = usePageTransitionContext()
 
-  // Función para manejar navegación en móviles con transición
-  const handleMobileNavigation = async (href: string) => {
+  const handleMobileNavigation = (href: string) => {
     setMenuOpen(false)
-    // Pequeño delay para que se vea la animación de cierre
-    setTimeout(async () => {
-      await transitionTo(href)
+    setTimeout(() => {
+      router.push(href)
     }, 200)
-  }
-
-  // Navegación en desktop ahora la gestiona TransitionLink
-
-  // Variantes de animación para el menú
-  const menuVariants = {
-    closed: {
-      opacity: 0,
-      height: 0
-    },
-    open: {
-      opacity: 1,
-      height: "auto"
-    }
-  }
-
-  // Variantes para los elementos del menú
-  const itemVariants = {
-    closed: {
-      opacity: 0,
-      x: 20
-    },
-    open: {
-      opacity: 1,
-      x: 0
-    }
-  }
-
-  // Variantes para el contenedor de elementos
-  const containerVariants = {
-    closed: {
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1
-      }
-    },
-    open: {
-      transition: {
-        staggerChildren: 0.07,
-        delayChildren: 0.1
-      }
-    }
-  }
-
-  // Variantes para el icono hamburguesa
-  const hamburgerVariants = {
-    closed: {
-      rotate: 0,
-      transition: {
-        duration: 0.2
-      }
-    },
-    open: {
-      rotate: 180,
-      transition: {
-        duration: 0.2
-      }
-    }
   }
 
   return (
@@ -94,10 +86,10 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-start justify-between">
         {/* Izquierda: Logo con espacio rectangular */}
         <div className="flex items-center w-[180px] sm:w-2/5">
-          <TransitionLink
+          <Link
             href="/"
-            ariaLabel="Go to homepage"
-            className={`relative w-[140px] h-[48px] sm:w-[260px] sm:h-[80px] ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+            aria-label="Go to homepage"
+            className="relative w-[140px] h-[48px] sm:w-[260px] sm:h-[80px] cursor-pointer"
           >
             <Image
               src="/logoScafwrap.jpeg"
@@ -107,7 +99,7 @@ export const Navbar = () => {
               className="object-contain hover:opacity-90 transition-opacity duration-200"
               priority
             />
-          </TransitionLink>
+          </Link>
         </div>
         {/* Desktop: Número y secciones */}
         <div className="hidden sm:flex flex-col w-3/5 items-end">
@@ -118,18 +110,18 @@ export const Navbar = () => {
             {navItems.map((item) => {
               const isActive = pathname === item.href
               return (
-                <TransitionLink
+                <Link
                   key={item.href}
                   href={item.href}
                   className={`relative text-xs md:text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200
                     ${isActive ? "text-[#00AEEF]" : "text-[#1E1E1E]"}
-                    ${isLoading ? "pointer-events-none opacity-50" : "hover:text-[#00BFFF] cursor-pointer"}`}
+                    hover:text-[#00BFFF] cursor-pointer`}
                 >
                   {item.label}
-                  {isActive && (
+                  {isActive ? (
                     <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"></span>
-                  )}
-                </TransitionLink>
+                  ) : null}
+                </Link>
               )
             })}
           </nav>
@@ -142,7 +134,7 @@ export const Navbar = () => {
           variants={hamburgerVariants}
           animate={menuOpen ? "open" : "closed"}
         >
-          {!menuOpen ? (
+          {menuOpen ? null : (
             <motion.span
               initial={{ opacity: 0, rotate: 90 }}
               animate={{ opacity: 1, rotate: 0 }}
@@ -154,13 +146,13 @@ export const Navbar = () => {
                 <rect y="20" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
               </svg>
             </motion.span>
-          ) : null}
+          )}
         </motion.button>
       </div>
-      
+
       {/* Mobile: Menú desplegable animado */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen ? (
           <motion.div
             className="sm:hidden fixed inset-0 z-50 flex"
             initial={{ opacity: 0 }}
@@ -232,7 +224,7 @@ export const Navbar = () => {
                         onClick={() => handleMobileNavigation(item.href)}
                       >
                         {item.label}
-                        {isActive && (
+                        {isActive ? (
                           <motion.span
                             className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"
                             layoutId="activeIndicator"
@@ -242,7 +234,7 @@ export const Navbar = () => {
                               damping: 30
                             }}
                           />
-                        )}
+                        ) : null}
                       </button>
                     </motion.div>
                   )
@@ -250,7 +242,7 @@ export const Navbar = () => {
               </motion.nav>
             </motion.div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </header>
   )

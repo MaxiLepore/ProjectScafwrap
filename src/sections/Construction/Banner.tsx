@@ -2,7 +2,7 @@
 // src/sections/Construction/Banner.tsx
 import Image from "next/image";
 import ConstructionInfo from "./ConstructionInfo";
-import React, { useState } from "react";
+import { useState } from "react";
 import Lightbox from "@/components/Lightbox";
 
 export default function Banner() {
@@ -60,6 +60,7 @@ export default function Banner() {
                   alt={image.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={index < 3}
                   className="object-cover transition duration-300 group-hover:brightness-75"
                 />
                 {/* Ícono de lupa al hacer hover */}

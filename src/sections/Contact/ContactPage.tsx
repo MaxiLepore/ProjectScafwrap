@@ -1,8 +1,13 @@
 // src/sections/Contact/ContactPage.tsx
 "use client"
 import { useState, useEffect } from "react"
-import emailjs from '@emailjs/browser';
 import { useFormValidation } from '@/hooks/useFormValidation';
+
+const CheckIcon = (
+  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+)
 
 export default function ContactPage() {
   const initialFormData = {
@@ -35,7 +40,7 @@ export default function ContactPage() {
       const timer = setTimeout(() => {
         setStatus(null);
       }, 5000);
-      
+
       return () => clearTimeout(timer);
     }
   }, [status]);
@@ -51,13 +56,13 @@ export default function ContactPage() {
     setLoading(true);
     setStatus(null);
     setServerError(null);
-    
+
     // Validate form before submission
     if (!validateAll()) {
       setLoading(false);
       return;
     }
-    
+
     try {
       // Server-side validation
       const validationResponse = await fetch('/api/contact', {
@@ -65,25 +70,26 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      
+
       if (!validationResponse.ok) {
         const errorData = await validationResponse.json();
         console.error('Validation error:', errorData);
-        
+
         if (errorData.fieldErrors) {
           // Handle field-specific errors from server
           Object.keys(errorData.fieldErrors).forEach(field => {
             updateField(field as keyof typeof formData, formData[field as keyof typeof formData]);
           });
         }
-        
+
         setServerError(errorData.message || 'Please check the form and try again');
         setStatus('error');
         setLoading(false);
         return;
       }
-      
-      // If validation passes, send with EmailJS
+
+      // If validation passes, dynamically load and send with EmailJS
+      const { default: emailjs } = await import('@emailjs/browser');
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -97,7 +103,7 @@ export default function ContactPage() {
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
-      
+
       setStatus('success');
       resetForm();
     } catch (error) {
@@ -200,23 +206,21 @@ export default function ContactPage() {
                       onChange={handleInputChange}
                       required
                       className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
-                        getFieldError('name') 
-                          ? 'border-red-500 bg-red-50' 
+                        getFieldError('name')
+                          ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
                       }`}
                       placeholder="Please enter your full name"
                     />
-                    {isFieldValid('name') && formData.name && !getFieldError('name') && (
+                    {isFieldValid('name') && formData.name && !getFieldError('name') ? (
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                        {CheckIcon}
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  {getFieldError('name') && (
+                  {getFieldError('name') ? (
                     <p className="mt-1 text-sm text-red-600">{getFieldError('name')}</p>
-                  )}
+                  ) : null}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -231,23 +235,21 @@ export default function ContactPage() {
                       onChange={handleInputChange}
                       required
                       className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
-                        getFieldError('email') 
-                          ? 'border-red-500 bg-red-50' 
+                        getFieldError('email')
+                          ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
                       }`}
                       placeholder="Please enter your email address"
                     />
-                    {isFieldValid('email') && formData.email && !getFieldError('email') && (
+                    {isFieldValid('email') && formData.email && !getFieldError('email') ? (
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                        {CheckIcon}
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  {getFieldError('email') && (
+                  {getFieldError('email') ? (
                     <p className="mt-1 text-sm text-red-600">{getFieldError('email')}</p>
-                  )}
+                  ) : null}
                 </div>
               </div>
 
@@ -264,23 +266,21 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
-                        getFieldError('phone') 
-                          ? 'border-red-500 bg-red-50' 
+                        getFieldError('phone')
+                          ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
                       }`}
                       placeholder="Your phone number (optional)"
                     />
-                    {isFieldValid('phone') && formData.phone && !getFieldError('phone') && (
+                    {isFieldValid('phone') && formData.phone && !getFieldError('phone') ? (
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                        {CheckIcon}
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  {getFieldError('phone') && (
+                  {getFieldError('phone') ? (
                     <p className="mt-1 text-sm text-red-600">{getFieldError('phone')}</p>
-                  )}
+                  ) : null}
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
@@ -294,23 +294,21 @@ export default function ContactPage() {
                       value={formData.company}
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
-                        getFieldError('company') 
-                          ? 'border-red-500 bg-red-50' 
+                        getFieldError('company')
+                          ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
                       }`}
                       placeholder="Your company name (optional)"
                     />
-                    {isFieldValid('company') && formData.company && !getFieldError('company') && (
+                    {isFieldValid('company') && formData.company && !getFieldError('company') ? (
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                        {CheckIcon}
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  {getFieldError('company') && (
+                  {getFieldError('company') ? (
                     <p className="mt-1 text-sm text-red-600">{getFieldError('company')}</p>
-                  )}
+                  ) : null}
                 </div>
               </div>
 
@@ -327,23 +325,21 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     required
                     className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
-                      getFieldError('subject') 
-                        ? 'border-red-500 bg-red-50' 
+                      getFieldError('subject')
+                        ? 'border-red-500 bg-red-50'
                         : 'border-gray-300'
                     }`}
                     placeholder="Please enter a subject for your message"
                   />
-                  {isFieldValid('subject') && formData.subject && !getFieldError('subject') && (
+                  {isFieldValid('subject') && formData.subject && !getFieldError('subject') ? (
                     <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                      <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
+                      {CheckIcon}
                     </div>
-                  )}
+                  ) : null}
                 </div>
-                {getFieldError('subject') && (
+                {getFieldError('subject') ? (
                   <p className="mt-1 text-sm text-red-600">{getFieldError('subject')}</p>
-                )}
+                ) : null}
               </div>
 
               <div>
@@ -359,23 +355,21 @@ export default function ContactPage() {
                     required
                     rows={10}
                     className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors resize-none ${
-                      getFieldError('message') 
-                        ? 'border-red-500 bg-red-50' 
+                      getFieldError('message')
+                        ? 'border-red-500 bg-red-50'
                         : 'border-gray-300'
                     }`}
                     placeholder="Please enter your message"
                   />
-                  {isFieldValid('message') && formData.message && !getFieldError('message') && (
+                  {isFieldValid('message') && formData.message && !getFieldError('message') ? (
                     <div className="absolute top-3 right-3">
-                      <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
+                      {CheckIcon}
                     </div>
-                  )}
+                  ) : null}
                 </div>
-                {getFieldError('message') && (
+                {getFieldError('message') ? (
                   <p className="mt-1 text-sm text-red-600">{getFieldError('message')}</p>
-                )}
+                ) : null}
                 <div className="mt-1 text-right text-sm text-gray-500">
                   {formData.message.length}/1000 characters
                 </div>
@@ -400,32 +394,32 @@ export default function ContactPage() {
                   'Send Message'
                 )}
               </button>
-              
+
               {/* Status Messages */}
-              {status === 'success' && (
+              {status === 'success' ? (
                 <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg animate-fadeIn">
                   <p className="text-green-800 text-center font-semibold">
                     ✓ Message sent successfully! We&apos;ll get back to you soon.
                   </p>
                 </div>
-              )}
-              
-              {status === 'error' && (
+              ) : null}
+
+              {status === 'error' ? (
                 <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
                   <p className="text-red-800 text-center font-semibold">
                     {serverError || 'Failed to send message. Please try again.'}
                   </p>
                 </div>
-              )}
-              
+              ) : null}
+
               {/* Form validation summary */}
-              {Object.keys(errors).length > 0 && (
+              {Object.keys(errors).length > 0 ? (
                 <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                   <p className="text-yellow-800 text-sm">
                     Please fix the errors above before submitting the form.
                   </p>
                 </div>
-              )}
+              ) : null}
             </form>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 
 interface LightboxProps {
@@ -9,8 +9,8 @@ interface LightboxProps {
   onClose: () => void;
 }
 
-const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) => {
-  const [current, setCurrent] = React.useState(initialIndex);
+const Lightbox = ({ images, initialIndex, onClose }: LightboxProps) => {
+  const [current, setCurrent] = useState(initialIndex);
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % images.length);
@@ -57,8 +57,9 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
               src={images[current].src}
               alt={images[current].alt}
               fill
+              sizes="90vw"
+              loading="eager"
               className="object-contain rounded-lg shadow-lg max-h-[90vh] max-w-[60vw] mx-auto"
-              priority
             />
           </div>
           <button
@@ -79,7 +80,14 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
               aria-label={`Ver imagen ${idx + 1}`}
             >
               <div className="relative w-16 h-12">
-                <Image src={img.src} alt={img.alt} fill className="object-cover" />
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="64px"
+                  loading="lazy"
+                  className="object-cover"
+                />
               </div>
             </button>
           ))}
@@ -89,4 +97,4 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
   );
 };
 
-export default Lightbox; 
+export default Lightbox;

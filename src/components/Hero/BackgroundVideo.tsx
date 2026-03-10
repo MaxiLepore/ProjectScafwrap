@@ -10,29 +10,26 @@ interface BackgroundVideoProps {
   className?: string
 }
 
-export const BackgroundVideo = ({ 
-  src, 
-  onVideoLoad, 
+export const BackgroundVideo = ({
+  src,
+  onVideoLoad,
   onVideoError,
-  className = '' 
+  className = ''
 }: BackgroundVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleVideoLoad = () => {
-    // Marcar video como cargado para métricas de performance
     logger.performanceMark('hero-video-loaded')
     logger.info('Hero video loaded successfully', { src })
     onVideoLoad?.()
   }
 
   const handleVideoError = () => {
-    // Log error de forma más profesional
     logger.error('Error loading video, falling back to static content', { src })
     onVideoError?.()
   }
 
   const handleCanPlayThrough = () => {
-    // Marcar video como listo para reproducción
     logger.performanceMark('hero-video-ready')
     logger.performanceMeasure('hero-video-load-time', 'hero-video-start', 'hero-video-ready')
   }
@@ -42,7 +39,6 @@ export const BackgroundVideo = ({
     const video = videoRef.current
     if (!video) return
 
-    // Marcar inicio de carga del video
     logger.performanceMark('hero-video-start')
 
     const observer = new IntersectionObserver(
@@ -72,24 +68,13 @@ export const BackgroundVideo = ({
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
+        poster="/images/hero/video-poster.webp"
+        src={src}
         onLoadedData={handleVideoLoad}
         onError={handleVideoError}
         onCanPlayThrough={handleCanPlayThrough}
-        style={{
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
-          WebkitTransform: 'translateZ(0)',
-          WebkitBackfaceVisibility: 'hidden',
-        }}
-      >
-        <source src={src} type="video/mp4" />
-        {/* Fallback para navegadores que no soportan video */}
-        <div className="w-full h-full bg-gradient-to-br from-blue-900 to-cyan-800 flex items-center justify-center">
-          <p className="text-white text-xl">Video no soportado</p>
-        </div>
-      </video>
+      />
     </div>
   )
 }
