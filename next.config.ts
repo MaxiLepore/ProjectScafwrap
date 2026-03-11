@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: "/((?!video|images|_next).*)",
         headers: [
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.emailjs.com; connect-src 'self' api.emailjs.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self';"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.emailjs.com; connect-src 'self' api.emailjs.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; media-src 'self' blob: data:;"
           },
         ],
       },

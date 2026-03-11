@@ -36,14 +36,9 @@ export const BackgroundVideo = ({
 
     logger.performanceMark('hero-video-start')
 
-    // Solo pausar/reanudar basado en visibilidad — autoPlay se encarga del inicio
-    let isFirstCallback = true
+    // Pausar/reanudar basado en visibilidad — play() en video ya reproduciendo es un no-op
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (isFirstCallback) {
-          isFirstCallback = false
-          return
-        }
         if (entry.isIntersecting) {
           video.play().catch((error) => {
             logger.warn('Video play failed', { error: error.message, src })
@@ -76,10 +71,11 @@ export const BackgroundVideo = ({
         loop
         playsInline
         preload="auto"
-        src={src}
         onCanPlayThrough={handleCanPlayThrough}
         onError={handleVideoError}
-      />
+      >
+        <source src={src} type="video/mp4" />
+      </video>
     </div>
   )
 }
