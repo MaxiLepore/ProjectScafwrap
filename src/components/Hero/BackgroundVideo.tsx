@@ -18,9 +18,9 @@ export const BackgroundVideo = ({
 }: BackgroundVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  const handleVideoLoad = () => {
-    logger.performanceMark('hero-video-loaded')
-    logger.info('Hero video loaded successfully', { src })
+  const handleCanPlayThrough = () => {
+    logger.performanceMark('hero-video-ready')
+    logger.performanceMeasure('hero-video-load-time', 'hero-video-start', 'hero-video-ready')
     onVideoLoad?.()
   }
 
@@ -29,20 +29,21 @@ export const BackgroundVideo = ({
     onVideoError?.()
   }
 
-  const handleCanPlayThrough = () => {
-    logger.performanceMark('hero-video-ready')
-    logger.performanceMeasure('hero-video-load-time', 'hero-video-start', 'hero-video-ready')
-  }
-
-  // Optimización: Pausar video cuando no es visible
+  // Pausar video cuando no es visible (ahorro de recursos)
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
     logger.performanceMark('hero-video-start')
 
+    // Solo pausar/reanudar basado en visibilidad — autoPlay se encarga del inicio
+    let isFirstCallback = true
     const observer = new IntersectionObserver(
       ([entry]) => {
+        if (isFirstCallback) {
+          isFirstCallback = false
+          return
+        }
         if (entry.isIntersecting) {
           video.play().catch((error) => {
             logger.warn('Video play failed', { error: error.message, src })
@@ -51,7 +52,7 @@ export const BackgroundVideo = ({
           video.pause()
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.1 }
     )
 
     observer.observe(video)
@@ -61,19 +62,23 @@ export const BackgroundVideo = ({
 
   return (
     <div className={`absolute inset-0 w-full h-full ${className}`}>
+      {/* Poster estático como fondo — se ve mientras el video carga */}
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        style={{ backgroundImage: 'url(/images/hero/video-poster.webp)' }}
+      />
+
       <video
         ref={videoRef}
-        className="w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover object-center"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        poster="/images/hero/video-poster.webp"
         src={src}
-        onLoadedData={handleVideoLoad}
-        onError={handleVideoError}
         onCanPlayThrough={handleCanPlayThrough}
+        onError={handleVideoError}
       />
     </div>
   )

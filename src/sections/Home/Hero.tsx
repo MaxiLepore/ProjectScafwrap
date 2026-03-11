@@ -95,7 +95,7 @@ export default function Hero() {
       <DecorativeOverlays />
 
       {/* Overlay oscuro mejorado para mejor legibilidad - Reducido en mobile */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent sm:from-black/60 sm:via-black/20 sm:bg-black/40 lg:bg-black/30 z-10 transition-opacity duration-700" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent sm:from-black/60 sm:via-black/20 sm:bg-black/40 lg:bg-black/30 z-10" />
 
       {/* Contenido del carrusel de descripciones - Mejorado para mobile y desktop */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-end z-20 px-4 pb-20 sm:pb-12 sm:px-6 sm:bottom-8 sm:left-4 sm:right-auto sm:items-start lg:bottom-20 lg:right-20 lg:left-auto lg:items-end lg:px-8">

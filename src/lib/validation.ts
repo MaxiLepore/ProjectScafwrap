@@ -1,15 +1,9 @@
 // Client-side validation utilities
-export interface ValidationError {
-  field: string;
-  message: string;
-}
-
 export interface FormErrors {
   [key: string]: string;
 }
 
-// Validation rules
-export const validationRules = {
+const validationRules = {
   name: {
     required: 'Name is required',
     minLength: (min: number) => `Name must be at least ${min} characters long`,
@@ -115,7 +109,3 @@ export const validateForm = (formData: {
   return errors;
 };
 
-// Check if form is valid
-export const isFormValid = (errors: FormErrors): boolean => {
-  return Object.keys(errors).length === 0;
-};

@@ -1,6 +1,6 @@
 'use client'
 
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import TransitionLink from '@/components/TransitionLink'
 
@@ -49,38 +49,13 @@ const btnClass =
   'px-8 py-4 bg-secondary text-white uppercase tracking-wide text-[13px] sm:text-[13px] md:text-[14px] font-semibold shadow-xl hover:bg-white hover:text-secondary border-2 border-secondary transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-sm min-h-[52px] min-w-[140px] flex items-center justify-center touch-manipulation'
 
 export const SlideContent = ({ slide, isActive, className = '' }: SlideContentProps) => {
-  const [mounted, setMounted] = useState(false)
-  const hasAnimated = useRef(false)
+  // false on both server and client initial render → ensures hydration match
+  // After hydration, useEffect flips to true → subsequent slides animate in
+  const [hasHydrated, setHasHydrated] = useState(false)
 
-  useLayoutEffect(() => {
-    setMounted(true)
+  useEffect(() => {
+    setHasHydrated(true)
   }, [])
-
-  // SSR + hydration: render static HTML (no motion = no hydration mismatch)
-  if (!mounted) {
-    if (!isActive) return null
-    return (
-      <div className={className}>
-        <h1 className={titleClass}>{slide.title}</h1>
-        <p className={descClass}>{slide.description}</p>
-        <div className={btnWrapClass}>
-          <div>
-            <TransitionLink href={`/${slide.buttonLink}`} className={btnClass}>
-              {slide.buttonText}
-            </TransitionLink>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // After hydration: use Framer Motion for slide transitions
-  // First render after mount: skip entry animation (initial={false})
-  // Subsequent slide changes: animate from "hidden"
-  const skipEntry = !hasAnimated.current
-  if (isActive && !hasAnimated.current) {
-    hasAnimated.current = true
-  }
 
   return (
     <AnimatePresence mode="wait">
@@ -89,7 +64,7 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
           key={slide.title}
           className={className}
           variants={containerVariants}
-          initial={skipEntry ? false : 'hidden'}
+          initial={hasHydrated ? 'hidden' : false}
           animate="visible"
           exit="exit"
           transition={{
@@ -99,7 +74,6 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
             delayChildren: 0.05
           }}
         >
-          {/* Título con animación fluida */}
           <motion.h1
             className={titleClass}
             variants={itemVariants}
@@ -108,7 +82,6 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
             {slide.title}
           </motion.h1>
 
-          {/* Descripción con animación fluida */}
           <motion.p
             className={descClass}
             variants={itemVariants}
@@ -117,7 +90,6 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
             {slide.description}
           </motion.p>
 
-          {/* Botón con animación fluida */}
           <motion.div
             className={btnWrapClass}
             variants={buttonVariants}

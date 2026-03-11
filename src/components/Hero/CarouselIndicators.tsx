@@ -16,7 +16,7 @@ export const CarouselIndicators = ({
   return (
     <div className={`absolute left-1/2 transform -translate-x-1/2 z-30 flex gap-2 sm:gap-3 opacity-100 ${className}`}
          style={{ 
-           animation: 'fadeInUp 0.6s ease-out forwards',
+           animation: 'fade-in-up 0.6s ease-out forwards',
            animationDelay: '0.5s'
          }}>
       {Array.from({ length: totalSlides }, (_, index) => (

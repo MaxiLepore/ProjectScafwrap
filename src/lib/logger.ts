@@ -49,10 +49,6 @@ class Logger {
     // Por ejemplo: Sentry, LogRocket, DataDog, etc.
   }
 
-  public debug(message: string, context?: Record<string, unknown>): void {
-    this.log('debug', message, context);
-  }
-
   public info(message: string, context?: Record<string, unknown>): void {
     this.log('info', message, context);
   }
@@ -69,7 +65,7 @@ class Logger {
   public performanceMark(name: string): void {
     if (typeof window !== 'undefined' && 'performance' in window) {
       performance.mark(name);
-      this.debug(`Performance mark: ${name}`);
+      this.log('debug', `Performance mark: ${name}`);
     }
   }
 
