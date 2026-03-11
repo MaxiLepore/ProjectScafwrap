@@ -3,15 +3,15 @@
 import Image from "next/image";
 import RecyclingInfo from "./RecyclingInfo";
 import { useState } from "react";
-import Lightbox from "@/components/Lightbox";
+import dynamic from "next/dynamic";
+const Lightbox = dynamic(() => import("@/components/Lightbox"), { ssr: false });
+
+const recyclingImages = [
+  { src: "/images/recycling/Recycling1.jpg", alt: "Shrink wrap recycling process in collaboration with Safesmart Access and Safeseal Shrinkwrap" },
+  { src: "/images/recycling/Recycling2.jpg", alt: "Shrink wrap recycling process in collaboration with Safesmart Access and Safeseal Shrinkwrap" },
+];
 
 export default function Banner() {
-  // Imágenes simples para la galería
-  const recyclingImages = [
-    { src: "/images/recycling/Recycling1.jpg", alt: "Shrink wrap recycling process in collaboration with Safesmart Access and Safeseal Shrinkwrap" },
-    { src: "/images/recycling/Recycling2.jpg", alt: "Shrink wrap recycling process in collaboration with Safesmart Access and Safeseal Shrinkwrap" },
-  ];
-
   // Estado para el lightbox
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -39,7 +39,7 @@ export default function Banner() {
         <div className="flex flex-wrap justify-center gap-40">
           {recyclingImages.map((image, index) => (
             <button
-              key={index}
+              key={image.src}
               className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 focus:outline-none group cursor-pointer"
               onClick={() => openLightbox(index)}
               aria-label={`Ver imagen ${index + 1} en grande`}

@@ -74,7 +74,7 @@ const Lightbox = ({ images, initialIndex, onClose }: LightboxProps) => {
         <div className="flex gap-2 mt-4 overflow-x-auto max-w-full">
           {images.map((img, idx) => (
             <button
-              key={idx}
+              key={img.src}
               className={`border-2 rounded-md overflow-hidden w-16 h-12 ${idx === current ? 'border-blue-400' : 'border-transparent'}`}
               onClick={() => setCurrent(idx)}
               aria-label={`Ver imagen ${idx + 1}`}

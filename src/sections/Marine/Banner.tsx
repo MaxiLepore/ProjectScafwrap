@@ -3,22 +3,22 @@
 import Image from "next/image";
 import MarineInfo from "./MarineInfo";
 import { useState } from "react";
-import Lightbox from "@/components/Lightbox";
+import dynamic from "next/dynamic";
+const Lightbox = dynamic(() => import("@/components/Lightbox"), { ssr: false });
+
+const marineImages = [
+  { src: "/images/marine/Marine1.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine2.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine3.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine4.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine5.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine6.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine7.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine8.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+  { src: "/images/marine/Marine9.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
+];
 
 export default function Banner() {
-  // Imágenes simples para la galería
-  const marineImages = [
-    { src: "/images/marine/Marine1.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine2.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine3.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine4.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine5.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine6.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine7.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine8.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-    { src: "/images/marine/Marine9.jpg", alt: "Shrinkwrapped yacht undergoing maintenance at a shipyard in Auckland" },
-  ];
-
   // Estado para el lightbox
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -46,7 +46,7 @@ export default function Banner() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {marineImages.map((image, index) => (
             <button
-              key={index}
+              key={image.src}
               className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 focus:outline-none group cursor-pointer"
               onClick={() => openLightbox(index)}
               aria-label={`Ver imagen ${index + 1} en grande`}

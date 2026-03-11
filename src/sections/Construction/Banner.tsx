@@ -3,22 +3,22 @@
 import Image from "next/image";
 import ConstructionInfo from "./ConstructionInfo";
 import { useState } from "react";
-import Lightbox from "@/components/Lightbox";
+import dynamic from "next/dynamic";
+const Lightbox = dynamic(() => import("@/components/Lightbox"), { ssr: false });
+
+const constructionImages = [
+  { src: "/images/construction/Construction1.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction2.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction3.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction4.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction5.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction6.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction7.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction8.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+  { src: "/images/construction/Construction9.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
+];
 
 export default function Banner() {
-  // Imágenes para la galería de construcción
-  const constructionImages = [
-    { src: "/images/construction/Construction1.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction2.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction3.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction4.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction5.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction6.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction7.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction8.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-    { src: "/images/construction/Construction9.jpg", alt: "Shrink wrap weatherproofing on scaffolding at a construction site in Auckland, New Zealand" },
-  ];
-
   // Estado para el lightbox
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -38,17 +38,17 @@ export default function Banner() {
           </h1>
           <div className="h-1 w-24 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full absolute left-0 -bottom-3"></div>
         </div>
-        
+
         {/* Contenido descriptivo */}
         <div className="mb-16">
           <ConstructionInfo />
         </div>
-        
+
         {/* Galería de imágenes simple */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {constructionImages.map((image, index) => (
             <button
-              key={index}
+              key={image.src}
               className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 focus:outline-none group cursor-pointer"
               onClick={() => openLightbox(index)}
               aria-label={`Ver imagen ${index + 1} en grande`}

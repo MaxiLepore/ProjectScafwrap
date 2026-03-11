@@ -1,5 +1,7 @@
 'use client'
 
+const pulseDelayStyle = { animationDelay: '1s' } as const;
+
 interface DecorativeOverlaysProps {
   className?: string
 }
@@ -17,7 +19,7 @@ export const DecorativeOverlays = ({ className = '' }: DecorativeOverlaysProps) 
 
       {/* Elementos decorativos adicionales para desktop */}
       <div className="absolute top-1/2 left-8 w-2 h-16 bg-gradient-to-b from-cyan-400/60 to-transparent rounded-full animate-pulse-slow" />
-      <div className="absolute top-1/2 right-8 w-2 h-16 bg-gradient-to-b from-cyan-400/60 to-transparent rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 right-8 w-2 h-16 bg-gradient-to-b from-cyan-400/60 to-transparent rounded-full animate-pulse-slow" style={pulseDelayStyle} />
     </div>
   )
 }

@@ -3,22 +3,22 @@
 import Image from "next/image";
 import RecladInfo from "./RecladInfo";
 import { useState } from "react";
-import Lightbox from "@/components/Lightbox";
+import dynamic from "next/dynamic";
+const Lightbox = dynamic(() => import("@/components/Lightbox"), { ssr: false });
+
+const recladImages = [
+  { src: "/images/reclads/Reclads1.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads2.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads3.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads4.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads5.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads6.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads7.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads8.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+  { src: "/images/reclads/Reclads9.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
+];
 
 export default function Banner() {
-  // Imágenes para la galería de reclads
-  const recladImages = [
-    { src: "/images/reclads/Reclads1.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads2.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads3.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads4.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads5.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads6.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads7.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads8.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-    { src: "/images/reclads/Reclads9.jpg", alt: "Residential building recladding project with weatherproof shrink wrap in Auckland" },
-  ];
-
   // Estado para el lightbox
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -46,7 +46,7 @@ export default function Banner() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {recladImages.map((image, index) => (
             <button
-              key={index}
+              key={image.src}
               className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 focus:outline-none group cursor-pointer"
               onClick={() => openLightbox(index)}
               aria-label={`Ver imagen ${index + 1} en grande`}
