@@ -28,18 +28,19 @@ export default function ContactPage() {
     setLoading(true);
     setStatus(null);
     try {
-      await emailjs.send(
-        'service_oqpns6j',
-        'template_1gjgcjg',
+     await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          title: formData.subject,
-          message: formData.message
-        },
-        '8lC1Nuqb1a81sM6oF'
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        title: formData.subject,
+        message: formData.message
+      },
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+);
       );
       setStatus('success');
       setFormData({
