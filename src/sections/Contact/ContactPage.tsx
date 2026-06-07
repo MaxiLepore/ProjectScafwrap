@@ -90,11 +90,33 @@ export default function ContactPage() {
       }
 
       // Validación OK → enviar el email desde el cliente vía EmailJS.
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+      // Guard: si falta alguna env var, probablemente el dev server no se
+      // reinició tras editar .env.local, o las vars no se están inyectando.
+      if (!serviceId || !templateId || !publicKey) {
+        console.error('EmailJS config missing:', {
+          serviceId,
+          templateId,
+          publicKey,
+        });
+        setStatus('error');
+        setServerError(
+          'Email configuration is missing. Restart the dev server after editing .env.local.'
+        );
+        setLoading(false);
+        return;
+      }
+
       const { default: emailjs } = await import('@emailjs/browser');
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        serviceId,
+        templateId,
         {
+          // `title` -> template Subject ({{title}}), `subject` kept for clarity
+          title: formData.subject,
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -102,15 +124,26 @@ export default function ContactPage() {
           subject: formData.subject,
           message: formData.message
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        { publicKey }
       );
 
       setStatus('success');
       resetForm();
     } catch (error) {
       setStatus('error');
-      setServerError('Failed to send message. Please try again later.');
-      console.error('Contact form error:', error);
+
+      // Surface the real EmailJS error so failures are diagnosable.
+      // EmailJS rejects with an object like { status, text }.
+      let detail = 'Failed to send message. Please try again later.';
+      if (error && typeof error === 'object' && 'text' in error) {
+        const e = error as { status?: number; text?: string };
+        detail = `EmailJS error${e.status ? ` (${e.status})` : ''}: ${e.text}`;
+      } else if (error instanceof Error && error.message) {
+        detail = `Error: ${error.message}`;
+      }
+
+      setServerError(detail);
+      console.error('EmailJS error:', error);
     } finally {
       setLoading(false);
     }
