@@ -33,6 +33,8 @@ export default function ContactPage() {
   const [status, setStatus] = useState<null | 'success' | 'error'>(null);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  // Honeypot anti-bot: campo oculto que un humano nunca rellena.
+  const [botField, setBotField] = useState('');
 
   // Auto-hide success message after 5 seconds
   useEffect(() => {
@@ -63,32 +65,31 @@ export default function ContactPage() {
       return;
     }
 
+    // Honeypot anti-bot: si viene relleno es un bot. Simulamos éxito sin
+    // enviar nada para no revelarle que fue detectado.
+    if (botField) {
+      setStatus('success');
+      resetForm();
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Server-side validation
+      // El servidor valida y aplica rate limiting.
       const validationResponse = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, website: botField })
       });
 
       if (!validationResponse.ok) {
-        const errorData = await validationResponse.json();
-        console.error('Validation error:', errorData);
-
-        if (errorData.fieldErrors) {
-          // Handle field-specific errors from server
-          Object.keys(errorData.fieldErrors).forEach(field => {
-            updateField(field as keyof typeof formData, formData[field as keyof typeof formData]);
-          });
-        }
-
+        const errorData = await validationResponse.json().catch(() => ({}));
         setServerError(errorData.message || 'Please check the form and try again');
         setStatus('error');
-        setLoading(false);
         return;
       }
 
-      // If validation passes, dynamically load and send with EmailJS
+      // Validación OK → enviar el email desde el cliente vía EmailJS.
       const { default: emailjs } = await import('@emailjs/browser');
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
@@ -109,7 +110,7 @@ export default function ContactPage() {
     } catch (error) {
       setStatus('error');
       setServerError('Failed to send message. Please try again later.');
-      console.error('EmailJS error:', error);
+      console.error('Contact form error:', error);
     } finally {
       setLoading(false);
     }
@@ -135,7 +136,7 @@ export default function ContactPage() {
           {/* Información de contacto */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-[#36c6f4] mb-4">
+              <h3 className="text-2xl font-bold text-accent mb-4">
                 Get In Touch
               </h3>
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -151,7 +152,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email:</p>
-                    <a href="mailto:chris@scaf-wrap.co.nz" className="text-[#36c6f4] hover:underline">
+                    <a href="mailto:chris@scaf-wrap.co.nz" className="text-accent hover:underline">
                       chris@scaf-wrap.co.nz
                     </a>
                   </div>
@@ -160,7 +161,7 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-[#36c6f4] mb-4">
+              <h3 className="text-2xl font-bold text-accent mb-4">
                 Office Address
               </h3>
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -173,7 +174,7 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-[#36c6f4] mb-4">
+              <h3 className="text-2xl font-bold text-accent mb-4">
                 Postal Address
               </h3>
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -192,6 +193,22 @@ export default function ContactPage() {
               Send us a Message
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot anti-bot: oculto para humanos; los bots lo rellenan */}
+              <div
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}
+              >
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={botField}
+                  onChange={(e) => setBotField(e.target.value)}
+                />
+              </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -205,7 +222,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors ${
                         getFieldError('name')
                           ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
@@ -234,7 +251,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors ${
                         getFieldError('email')
                           ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
@@ -265,7 +282,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors ${
                         getFieldError('phone')
                           ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
@@ -293,7 +310,7 @@ export default function ContactPage() {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                      className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors ${
                         getFieldError('company')
                           ? 'border-red-500 bg-red-50'
                           : 'border-gray-300'
@@ -324,7 +341,7 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors ${
                       getFieldError('subject')
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300'
@@ -354,7 +371,7 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     required
                     rows={10}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-[#36c6f4] focus:border-transparent transition-colors resize-none ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-colors resize-none ${
                       getFieldError('message')
                         ? 'border-red-500 bg-red-50'
                         : 'border-gray-300'
@@ -377,17 +394,37 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className={`w-full font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center ${
+                className={`w-full font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/50 focus-visible:ring-offset-2 ${
                   loading
-                    ? 'bg-[#36c6f4] bg-opacity-60 text-white cursor-not-allowed'
+                    ? 'bg-accent bg-opacity-60 text-white cursor-not-allowed'
                     : isFormValid
-                    ? 'bg-[#36c6f4] hover:bg-[#2bb4e0] text-white'
+                    ? 'bg-accent hover:bg-secondary text-white'
                     : 'bg-gray-400 text-gray-200 cursor-not-allowed'
                 }`}
                 disabled={loading || !isFormValid}
               >
                 {loading ? (
                   <div className="flex items-center space-x-2">
+                    <svg
+                      className="w-5 h-5 animate-spin"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
                     <span>Sending...</span>
                   </div>
                 ) : (
@@ -397,7 +434,7 @@ export default function ContactPage() {
 
               {/* Status Messages */}
               {status === 'success' ? (
-                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg animate-fadeIn">
+                <div role="status" className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg animate-fadeIn">
                   <p className="text-green-800 text-center font-semibold">
                     ✓ Message sent successfully! We&apos;ll get back to you soon.
                   </p>
@@ -405,7 +442,7 @@ export default function ContactPage() {
               ) : null}
 
               {status === 'error' ? (
-                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div role="alert" className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
                   <p className="text-red-800 text-center font-semibold">
                     {serverError || 'Failed to send message. Please try again.'}
                   </p>
@@ -414,7 +451,7 @@ export default function ContactPage() {
 
               {/* Form validation summary */}
               {Object.keys(errors).length > 0 ? (
-                <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div role="alert" className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                   <p className="text-yellow-800 text-sm">
                     Please fix the errors above before submitting the form.
                   </p>

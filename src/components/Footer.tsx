@@ -1,7 +1,7 @@
 // src/components/Footer.tsx
 import Image from "next/image";
 import TransitionLink from "@/components/TransitionLink";
-import Link from 'next/link';
+import { MateStudioBadge } from "@/components/MateStudioBadge";
 
 export const Footer = () => {
   return (
@@ -10,15 +10,15 @@ export const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-stretch gap-10 md:gap-0 relative">
           {/* DIRECTORY */}
           <div className="flex-1 mb-8 md:mb-0 md:pr-8 md:border-r md:border-gray-300 flex flex-col h-full">
-            <h3 className="text-[#36c6f4] text-xl font-bold uppercase tracking-wide mb-2 flex items-center gap-2 relative">
+            <h3 className="text-accent text-xl font-bold uppercase tracking-wide mb-2 flex items-center gap-2 relative">
               DIRECTORY
-              <span className="absolute left-0 -bottom-1 w-10 h-1 bg-[#36c6f4] rounded transition-all duration-300 group-hover:w-20" />
+              <span className="absolute left-0 -bottom-1 w-10 h-1 bg-accent rounded transition-all duration-300 group-hover:w-20" />
             </h3>
             <ul className="space-y-1 text-sm mt-6">
               <li>
                 <TransitionLink
                   href="/"
-                  className="hover:text-[#36c6f4] transition-colors duration-200"
+                  className="hover:text-accent transition-colors duration-200"
                 >
                   HOME
                 </TransitionLink>
@@ -26,7 +26,7 @@ export const Footer = () => {
               <li>
                 <TransitionLink
                   href="/marine"
-                  className="hover:text-[#36c6f4] transition-colors duration-200"
+                  className="hover:text-accent transition-colors duration-200"
                 >
                   MARINE
                 </TransitionLink>
@@ -34,7 +34,7 @@ export const Footer = () => {
               <li>
                 <TransitionLink
                   href="/construction"
-                  className="hover:text-[#36c6f4] transition-colors duration-200"
+                  className="hover:text-accent transition-colors duration-200"
                 >
                   CONSTRUCTION
                 </TransitionLink>
@@ -42,7 +42,7 @@ export const Footer = () => {
               <li>
                 <TransitionLink
                   href="/reclads"
-                  className="hover:text-[#36c6f4] transition-colors duration-200"
+                  className="hover:text-accent transition-colors duration-200"
                 >
                   RECLADS
                 </TransitionLink>
@@ -50,7 +50,7 @@ export const Footer = () => {
               <li>
                 <TransitionLink
                   href="/recycling"
-                  className="hover:text-[#36c6f4] transition-colors duration-200"
+                  className="hover:text-accent transition-colors duration-200"
                 >
                   RECYCLING
                 </TransitionLink>
@@ -58,7 +58,7 @@ export const Footer = () => {
               <li>
                 <TransitionLink
                   href="/contact"
-                  className="hover:text-[#36c6f4] transition-colors duration-200"
+                  className="hover:text-accent transition-colors duration-200"
                 >
                   CONTACT
                 </TransitionLink>
@@ -67,9 +67,9 @@ export const Footer = () => {
           </div>
           {/* GET IN TOUCH */}
           <div className="flex-1 mb-8 md:mb-0 md:px-8 md:border-r md:border-gray-300 flex flex-col h-full">
-            <h3 className="text-[#36c6f4] text-xl font-bold uppercase tracking-wide mb-2 flex items-center gap-2 relative">
+            <h3 className="text-accent text-xl font-bold uppercase tracking-wide mb-2 flex items-center gap-2 relative">
               GET IN TOUCH
-              <span className="absolute left-0 -bottom-1 w-10 h-1 bg-[#36c6f4] rounded transition-all duration-300 group-hover:w-20" />
+              <span className="absolute left-0 -bottom-1 w-10 h-1 bg-accent rounded transition-all duration-300 group-hover:w-20" />
             </h3>
             <div className="text-sm space-y-2 mt-6">
               <div>
@@ -80,7 +80,7 @@ export const Footer = () => {
                 <span className="font-semibold">EMAIL:</span>{" "}
                 <a
                   href="mailto:chris@scaf-wrap.co.nz"
-                  className="text-[#36c6f4] hover:underline"
+                  className="text-accent hover:underline"
                 >
                   CHRIS@SCAF-WRAP.CO.NZ
                 </a>
@@ -89,9 +89,9 @@ export const Footer = () => {
           </div>
           {/* FOLLOW US */}
           <div className="flex-1 flex flex-col items-start justify-between md:pl-8 h-full">
-            <h3 className="text-[#36c6f4] text-xl font-bold uppercase tracking-wide mb-2 flex items-center gap-2 relative">
+            <h3 className="text-accent text-xl font-bold uppercase tracking-wide mb-2 flex items-center gap-2 relative">
               FOLLOW US
-              <span className="absolute left-0 -bottom-1 w-10 h-1 bg-[#36c6f4] rounded transition-all duration-300 group-hover:w-20" />
+              <span className="absolute left-0 -bottom-1 w-10 h-1 bg-accent rounded transition-all duration-300 group-hover:w-20" />
             </h3>
             <div className="flex gap-3 mb-6 mt-6">
               <a
@@ -132,17 +132,7 @@ export const Footer = () => {
               © {new Date().getFullYear()} SCAFWRAP. All rights reserved.
             </span>
             <div className="flex items-center gap-2 text-center">
-              <span>Designed by</span>
-              <Link href="https://matestudio.co.nz/en" target="_blank" rel="noopener noreferrer">
-                <Image
-                  src="/logoMateStudio.jpeg"
-                  alt="Mate Studio"
-                  width={60}
-                  height={20}
-                  className="object-contain rounded cursor-pointer hover:opacity-80 transition-opacity"
-                  style={{ height: 'auto', width: 'auto' }}
-                />
-              </Link>
+              <MateStudioBadge />
             </div>
           </div>
         </div>

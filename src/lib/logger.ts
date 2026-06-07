@@ -31,22 +31,34 @@ class Logger {
       context,
     };
 
-    // Solo mostrar logs en desarrollo
     if (this.isDevelopment) {
       const logMethod = console[level] || console.log;
       logMethod(`[${entry.timestamp}] ${level.toUpperCase()}: ${message}`, context || '');
+      return;
     }
 
-    // En producción, podrías enviar logs a un servicio externo
-    if (!this.isDevelopment && level === 'error') {
-      // Aquí podrías integrar con servicios como Sentry, LogRocket, etc.
-  this.sendToExternalService();
+    // Producción: emitir error/warn como entradas estructuradas para que el
+    // log drain del hosting (p. ej. Vercel) las capture, y reenviarlas al
+    // webhook de logging si está configurado.
+    if (level === 'error' || level === 'warn') {
+      const sink = level === 'error' ? console.error : console.warn;
+      sink(JSON.stringify(entry));
+      this.sendToExternalService(entry);
     }
   }
 
-  private sendToExternalService(): void {
-    // Implementar envío a servicio externo si es necesario
-    // Por ejemplo: Sentry, LogRocket, DataDog, etc.
+  private sendToExternalService(entry: LogEntry): void {
+    const url = process.env.LOG_WEBHOOK_URL;
+    if (!url) return; // no-op documentado cuando no hay webhook configurado
+
+    // Fire-and-forget: un fallo de logging nunca debe romper el request.
+    void fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry),
+    }).catch(() => {
+      /* swallow */
+    });
   }
 
   public info(message: string, context?: Record<string, unknown>): void {

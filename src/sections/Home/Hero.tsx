@@ -11,6 +11,7 @@ import { logger } from "@/lib/logger";
 // Datos de los slides del carrusel
 const slides = [
   {
+    eyebrow: "Marine Refits",
     title: "Shrinkwrap for Marine Refits",
     description:
       "Scafwrap work closely with yacht captains and Auckland shipyards, supplying weatherproof shrinkwrapping solutions for boats, yachts and all marine refits.",
@@ -18,6 +19,7 @@ const slides = [
     buttonLink: "marine",
   },
   {
+    eyebrow: "Construction & Scaffolding",
     title: "Shrinkwrap for Construction",
     description:
       "Scafwrap provide shrinkwrap solutions for large construction & scaffolding companies, small builders and home owners on all types of building projects.",
@@ -25,6 +27,7 @@ const slides = [
     buttonLink: "construction",
   },
   {
+    eyebrow: "Building Reclads",
     title: "Shrinkwrap for Reclads",
     description:
       "Scafwrap provide a unique, full encapsulation shrinkwrap solution for weatherproofing leaky homes and all types of building reclads.",
@@ -32,6 +35,7 @@ const slides = [
     buttonLink: "reclads",
   },
   {
+    eyebrow: "Sustainability",
     title: "Shrinkwrap for Recycling",
     description:
       "Scafwrap actively work with a local recycling facility in Auckland to recycle our Shrinkwrap.",
@@ -94,11 +98,11 @@ export default function Hero() {
       {/* Overlays decorativos - Solo en desktop */}
       <DecorativeOverlays />
 
-      {/* Overlay oscuro mejorado para mejor legibilidad - Reducido en mobile */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent sm:from-black/60 sm:via-black/20 sm:bg-black/40 lg:bg-black/30 z-10" />
+      {/* Scrim de fondo — fuerte en mobile para legibilidad sobre cualquier frame del video */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/50 to-transparent sm:from-black/60 sm:via-black/20 sm:to-transparent sm:bg-black/40 lg:bg-black/30" />
 
       {/* Contenido del carrusel de descripciones - Mejorado para mobile y desktop */}
-      <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-end z-20 px-4 pb-20 sm:pb-12 sm:px-6 sm:bottom-8 sm:left-4 sm:right-auto sm:items-start lg:bottom-20 lg:right-20 lg:left-auto lg:items-end lg:px-8">
+      <div className="absolute inset-x-0 bottom-0 flex flex-col items-start justify-end z-20 px-5 pb-28 sm:pb-12 sm:px-6 sm:bottom-8 sm:left-4 sm:right-auto sm:items-start lg:bottom-20 lg:right-20 lg:left-auto lg:items-end lg:px-8">
         <div className="relative w-full max-w-lg sm:max-w-md lg:max-w-2xl xl:max-w-3xl">
           <SlideContent
             slide={slides[currentSlide]}
@@ -112,7 +116,7 @@ export default function Hero() {
         totalSlides={slides.length}
         currentSlide={currentSlide}
         onSlideChange={goToSlide}
-        className="bottom-2 sm:bottom-4 lg:bottom-8"
+        className="bottom-6 sm:bottom-6 lg:bottom-8"
       />
     </section>
   );

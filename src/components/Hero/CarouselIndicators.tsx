@@ -27,12 +27,12 @@ export const CarouselIndicators = ({
           aria-label={`Ir al slide ${index + 1}`}
           aria-pressed={index === currentSlide}
         >
-          {/* Indicador visual interno más pequeño */}
-          <span 
-            className={`block w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
+          {/* Indicador estilo barra de progreso */}
+          <span
+            className={`block h-1.5 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? 'bg-cyan-400 scale-125 shadow-lg ring-2 ring-cyan-300/50'
-                : 'bg-white/60 hover:bg-white/80 active:bg-white'
+                ? 'w-8 sm:w-10 bg-accent shadow-lg'
+                : 'w-2.5 bg-white/50 hover:bg-white/80 active:bg-white'
             }`}
           />
         </button>

@@ -26,7 +26,7 @@ export const useCarousel = ({
   pauseOnHover = true
 }: UseCarouselOptions): UseCarouselReturn => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const isPlayingRef = useRef(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   // Función para ir al siguiente slide
@@ -52,14 +52,14 @@ export const useCarousel = ({
       clearInterval(intervalRef.current)
       intervalRef.current = null
     }
-    isPlayingRef.current = false
+    setIsPlaying(false)
   }, [])
 
   // Función para iniciar el autoplay
   const play = useCallback(() => {
     if (!intervalRef.current) {
       intervalRef.current = setInterval(nextSlide, autoPlayInterval)
-      isPlayingRef.current = true
+      setIsPlaying(true)
     }
   }, [nextSlide, autoPlayInterval])
 
@@ -93,7 +93,7 @@ export const useCarousel = ({
 
   return {
     currentSlide,
-    isPlaying: isPlayingRef.current,
+    isPlaying,
     nextSlide,
     prevSlide,
     goToSlide,

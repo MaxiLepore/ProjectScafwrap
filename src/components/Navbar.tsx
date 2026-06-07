@@ -76,9 +76,7 @@ export const Navbar = () => {
 
   const handleMobileNavigation = (href: string) => {
     setMenuOpen(false)
-    setTimeout(() => {
-      router.push(href)
-    }, 200)
+    router.push(href)
   }
 
   return (
@@ -104,7 +102,13 @@ export const Navbar = () => {
         {/* Desktop: Número y secciones */}
         <div className="hidden sm:flex flex-col w-3/5 items-end">
           <span className="text-xs md:text-sm font-semibold text-[#1E1E1E] text-right mb-4 mt-2">
-            PH. <span className="text-[#008CD2] ml-1">0800 722 397</span>
+            PH.{" "}
+            <a
+              href="tel:0800722397"
+              className="text-secondary ml-1 hover:underline rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              0800 722 397
+            </a>
           </span>
           <nav className="flex gap-4 md:gap-5 lg:gap-6">
             {navItems.map((item) => {
@@ -113,13 +117,13 @@ export const Navbar = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative text-xs md:text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200
-                    ${isActive ? "text-[#00AEEF]" : "text-[#1E1E1E]"}
-                    hover:text-[#00BFFF] cursor-pointer`}
+                  className={`relative text-xs md:text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+                    ${isActive ? "text-primary" : "text-[#1E1E1E]"}
+                    hover:text-accent cursor-pointer`}
                 >
                   {item.label}
                   {isActive ? (
-                    <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"></span>
+                    <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-primary rounded"></span>
                   ) : null}
                 </Link>
               )
@@ -128,7 +132,7 @@ export const Navbar = () => {
         </div>
         {/* Mobile: Botón menú animado */}
         <motion.button
-          className="sm:hidden flex items-center justify-center p-2 text-2xl text-[#00AEEF]"
+          className="sm:hidden flex items-center justify-center p-2 text-2xl text-primary rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
           variants={hamburgerVariants}
@@ -141,9 +145,9 @@ export const Navbar = () => {
               transition={{ duration: 0.2 }}
             >
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect y="6" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
-                <rect y="13" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
-                <rect y="20" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                <rect y="6" width="28" height="2.5" rx="1.25" fill="var(--color-primary)" />
+                <rect y="13" width="28" height="2.5" rx="1.25" fill="var(--color-primary)" />
+                <rect y="20" width="28" height="2.5" rx="1.25" fill="var(--color-primary)" />
               </svg>
             </motion.span>
           )}
@@ -177,11 +181,17 @@ export const Navbar = () => {
               {/* Fila superior: Teléfono a la izquierda, botón cerrar a la derecha */}
               <div className="flex items-center justify-between w-full h-16 mb-2">
                 <span className="block text-xs font-semibold text-[#1E1E1E] text-left">
-                  PH. <span className="text-[#008CD2] ml-1">0800 722 397</span>
+                  PH.{" "}
+                  <a
+                    href="tel:0800722397"
+                    className="text-secondary ml-1 hover:underline rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
+                    0800 722 397
+                  </a>
                 </span>
                 {/* Botón de cerrar (hamburguesa animada) */}
                 <motion.button
-                  className="text-3xl text-[#00AEEF] focus:outline-none z-10 flex items-center justify-center"
+                  className="text-3xl text-primary z-10 flex items-center justify-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Cerrar menú"
                   whileTap={{ scale: 0.9 }}
@@ -190,9 +200,9 @@ export const Navbar = () => {
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
                 >
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="6" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
-                    <rect y="13" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
-                    <rect y="20" width="28" height="2.5" rx="1.25" fill="#00AEEF" />
+                    <rect y="6" width="28" height="2.5" rx="1.25" fill="var(--color-primary)" />
+                    <rect y="13" width="28" height="2.5" rx="1.25" fill="var(--color-primary)" />
+                    <rect y="20" width="28" height="2.5" rx="1.25" fill="var(--color-primary)" />
                   </svg>
                 </motion.button>
               </div>
@@ -218,15 +228,15 @@ export const Navbar = () => {
                       }}
                     >
                       <button
-                        className={`relative text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200 w-fit
-                          ${isActive ? "text-[#00AEEF]" : "text-[#1E1E1E]"}
-                          hover:text-[#00BFFF]`}
+                        className={`relative text-sm ${isActive ? "font-bold" : "font-normal"} uppercase tracking-wide px-2 py-1 transition-colors duration-200 w-fit rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+                          ${isActive ? "text-primary" : "text-[#1E1E1E]"}
+                          hover:text-accent`}
                         onClick={() => handleMobileNavigation(item.href)}
                       >
                         {item.label}
                         {isActive ? (
                           <motion.span
-                            className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#00AEEF] rounded"
+                            className="absolute left-0 -bottom-1 w-full h-0.5 bg-primary rounded"
                             layoutId="activeIndicator"
                             transition={{
                               type: "spring",

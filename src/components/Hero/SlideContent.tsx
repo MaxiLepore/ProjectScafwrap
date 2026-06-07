@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import TransitionLink from '@/components/TransitionLink'
 
 interface SlideData {
+  eyebrow: string
   title: string
   description: string
   buttonText: string
@@ -36,26 +37,32 @@ const buttonVariants = {
   exit: { opacity: 0, x: -50, scale: 0.95, filter: 'blur(4px)' }
 }
 
+const eyebrowClass =
+  'flex items-center gap-3 mb-3 text-accent font-heading font-semibold uppercase tracking-[0.2em] text-[12px] md:text-[13px] drop-shadow lg:justify-end'
+
 const titleClass =
-  'font-heading font-bold uppercase text-white drop-shadow-2xl text-center sm:text-left lg:text-right text-[24px] leading-[1.2] sm:text-[32px] sm:leading-tight md:text-[38px] lg:text-[44px] xl:text-[52px] px-2 sm:px-0'
+  'font-heading font-bold uppercase text-white drop-shadow-2xl text-left lg:text-right text-[30px] leading-[1.15] sm:text-[32px] sm:leading-tight md:text-[38px] lg:text-[44px] xl:text-[52px]'
 
 const descClass =
-  'mt-4 sm:mt-4 lg:mt-5 font-body text-white drop-shadow-lg text-center sm:text-left lg:text-right max-w-full text-[15px] leading-relaxed sm:text-[15px] sm:leading-relaxed md:text-[16px] lg:text-[17px] px-2 sm:px-0'
+  'mt-4 lg:mt-5 font-body text-white drop-shadow-lg text-left lg:text-right max-w-full text-[15px] leading-relaxed sm:text-[15px] sm:leading-relaxed md:text-[16px] lg:text-[17px]'
 
 const btnWrapClass =
-  'mt-6 sm:mt-5 lg:mt-6 flex justify-center sm:justify-start lg:justify-end px-2 sm:px-0'
+  'mt-7 sm:mt-5 lg:mt-6 flex justify-start lg:justify-end'
 
 const btnClass =
-  'px-8 py-4 bg-secondary text-white uppercase tracking-wide text-[13px] sm:text-[13px] md:text-[14px] font-semibold shadow-xl hover:bg-white hover:text-black border-2 border-secondary hover:border-black transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-sm min-h-[52px] min-w-[140px] flex items-center justify-center touch-manipulation'
+  'w-full sm:w-auto max-w-[340px] px-8 py-4 bg-secondary text-white uppercase tracking-wide text-[13px] md:text-[14px] font-semibold shadow-xl hover:bg-white hover:text-black border-2 border-secondary hover:border-black transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-sm min-h-[54px] min-w-[140px] flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
+
+// No-op subscription: el valor de hidratación nunca cambia tras montar
+const emptySubscribe = () => () => {}
 
 export const SlideContent = ({ slide, isActive, className = '' }: SlideContentProps) => {
-  // false on both server and client initial render → ensures hydration match
-  // After hydration, useEffect flips to true → subsequent slides animate in
-  const [hasHydrated, setHasHydrated] = useState(false)
-
-  useEffect(() => {
-    setHasHydrated(true)
-  }, [])
+  // false en el server y en el primer render del cliente → asegura match de hidratación
+  // Tras hidratar, useSyncExternalStore re-renderiza con true → los slides animan
+  const hasHydrated = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
 
   return (
     <AnimatePresence mode="wait">
@@ -74,6 +81,15 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
             delayChildren: 0.08
           }}
         >
+          <motion.div
+            className={eyebrowClass}
+            variants={itemVariants}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <span className="h-px w-8 bg-accent sm:w-10" aria-hidden="true" />
+            <span>{slide.eyebrow}</span>
+          </motion.div>
+
           <motion.h1
             className={titleClass}
             variants={itemVariants}
@@ -96,6 +112,7 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
             transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
           >
             <motion.div
+              className="w-full sm:w-auto"
               whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
             >

@@ -64,10 +64,10 @@ export default function Services() {
             </h2>
             <div className="h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mt-4 mx-auto w-24"></div>
           </div>
-          <h2 className="text-gray-700 text-lg mt-6 max-w-2xl mx-auto font-body">
+          <p className="text-gray-700 text-lg mt-6 max-w-2xl mx-auto font-body">
             Professional shrinkwrapping solutions across New Zealand for
             marine, construction, and specialty applications
-          </h2>
+          </p>
         </div>
 
         {/* Grid de servicios mejorado */}
@@ -76,7 +76,7 @@ export default function Services() {
             <TransitionLink
               key={service.id}
               href={service.link}
-              className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white block"
+              className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
             >
               {/* Imagen de fondo mejorada */}
               <div className="relative h-80 md:h-96 overflow-hidden">
@@ -110,7 +110,7 @@ export default function Services() {
                       <p className="text-cyan-100 text-base md:text-lg font-medium mb-3 font-body">
                         {service.subtitle}
                       </p>
-                      <p className="text-gray-200 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-md">
+                      <p className="text-gray-200 text-sm leading-relaxed max-w-md">
                         {service.description}
                       </p>
                     </div>
@@ -153,31 +153,57 @@ export default function Services() {
           <div className="text-center mb-8">
             <h3 className="text-3xl md:text-4xl font-bold font-heading mb-6">
               <span className="text-gray-800">SCAFWRAP LTD</span>{" "}
-              <span className="text-cyan-400">SHRINKWRAPPING SERVICES</span>
+              <span className="text-accent">SHRINKWRAPPING SERVICES</span>
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-600 font-body leading-relaxed text-sm">
             <div>
-              <h4 className="mb-4">
-              Welcome to Scafwrap, your premier provider of shrinkwrap solutions tailored for the 
-              building and construction, agricultural, and industrial sectors. We pride ourselves 
-              on our expertise in the marine industry, recognized as New Zealand&apos;s most experienced 
-              and reliable installers, catering to everything from trailer boats to mega yachts. 
-              Our services include protective coverings for international transport on the Superyacht 
+              <p className="mb-4">
+              Welcome to Scafwrap, your premier provider of shrinkwrap solutions tailored for the
+              building and construction, agricultural, and industrial sectors. We pride ourselves
+              on our expertise in the marine industry, recognized as New Zealand&apos;s most experienced
+              and reliable installers, catering to everything from trailer boats to mega yachts.
+              Our services include protective coverings for international transport on the Superyacht
               Express and large tents designed for repainting and refitting the largest yachts.
-              </h4>
+              </p>
             </div>
             <div>
-              <h4 className="mb-4">
-              Our weather-tight solutions enable you to maintain productivity regardless of weather 
-              conditions. Through our innovative shrinkwrap systems and dedicated service, we deliver 
-              effective weatherproofing solutions to a diverse array of New Zealand industries. 
-              Our continually evolving installation techniques often set the benchmark for industry 
+              <p className="mb-4">
+              Our weather-tight solutions enable you to maintain productivity regardless of weather
+              conditions. Through our innovative shrinkwrap systems and dedicated service, we deliver
+              effective weatherproofing solutions to a diverse array of New Zealand industries.
+              Our continually evolving installation techniques often set the benchmark for industry
               standards as our reputation grows.
-              </h4>
+              </p>
             </div>
           </div>
+        </div>
+
+        {/* Llamado a la acción principal */}
+        <div className="mt-16 text-center">
+          <p className="text-xl md:text-2xl font-semibold text-gray-800 font-heading mb-6">
+            Ready to protect your project?
+          </p>
+          <TransitionLink
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+          >
+            Get a free quote
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </TransitionLink>
         </div>
       </div>
     </section>

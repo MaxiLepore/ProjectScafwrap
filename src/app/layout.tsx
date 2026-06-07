@@ -2,6 +2,7 @@
 import "@/styles/globals.css"
 import type { Metadata, Viewport } from "next"
 import { ReactNode } from "react"
+import { headers } from "next/headers"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 
@@ -106,7 +107,8 @@ export const viewport: Viewport = {
   colorScheme: "light"
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined
   return (
     <html
       lang="en-NZ"
@@ -140,6 +142,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Structured Data - Non-blocking */}
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -257,8 +260,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
       </head>
       <body className="font-sans bg-white text-gray-900">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:font-semibold focus:text-white focus:shadow-lg"
+        >
+          Skip to content
+        </a>
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main id="main-content" tabIndex={-1} className="min-h-screen focus:outline-none">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
