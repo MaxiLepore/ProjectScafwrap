@@ -2,17 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * Emits a per-request nonce and a strict Content-Security-Policy so that
- * `script-src` does not need `'unsafe-inline'`. The nonce is forwarded to the
- * app via the `x-nonce` request header; `layout.tsx` reads it and applies it
- * to the inline JSON-LD script. Next.js propagates the nonce to its own
- * framework scripts when it detects a nonce'd CSP.
+ * `script-src` does not need `'unsafe-inline'`. Next.js detects the `nonce-`
+ * token in the CSP header and automatically propagates the nonce to its own
+ * framework scripts. The `x-nonce` request header is forwarded for any
+ * component that needs to nonce an *executable* inline script (JSON-LD data
+ * blocks do not need it — see `layout.tsx`).
  */
 export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
 
+  // React usa eval() en desarrollo (Fast Refresh, reconstrucción de
+  // stack traces). En producción nunca lo hace, así que solo permitimos
+  // 'unsafe-eval' en dev para mantener el CSP estricto en prod.
+  const scriptSrc = process.env.NODE_ENV === 'development'
+    ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'`
+    : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`;
+
   const csp = [
     `default-src 'self'`,
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    scriptSrc,
     // Tailwind / framer-motion inject inline styles — 'unsafe-inline' kept here
     // is an accepted trade-off (style injection is not script execution).
     `style-src 'self' 'unsafe-inline'`,

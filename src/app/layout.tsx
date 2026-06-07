@@ -2,7 +2,6 @@
 import "@/styles/globals.css"
 import type { Metadata, Viewport } from "next"
 import { ReactNode } from "react"
-import { headers } from "next/headers"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 
@@ -107,8 +106,7 @@ export const viewport: Viewport = {
   colorScheme: "light"
 }
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en-NZ"
@@ -140,9 +138,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         */}
         
         {/* Structured Data - Non-blocking */}
+        {/* JSON-LD es un bloque de datos, no JS ejecutable: CSP script-src no
+            lo afecta, así que no lleva nonce. Pasarle el nonce causaba un
+            hydration mismatch porque el navegador borra el atributo nonce del DOM. */}
         <script
           type="application/ld+json"
-          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
