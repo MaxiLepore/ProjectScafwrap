@@ -56,16 +56,16 @@ export const BackgroundVideo = ({
   }, [src])
 
   return (
-    <div className={`absolute inset-0 w-full h-full ${className}`}>
+    <div className={`absolute inset-0 w-full h-full contrast-[1.06] saturate-[1.08] brightness-[0.97] ${className}`}>
       {/* Poster estático como fondo — se ve mientras el video carga */}
       <div
-        className="absolute inset-0 w-full h-full bg-cover bg-[60%_center] sm:bg-center"
+        className="absolute inset-0 w-full h-full bg-cover bg-[65%_center] sm:bg-[60%_center]"
         style={{ backgroundImage: 'url(/images/hero/video-poster.webp)' }}
       />
 
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover object-[60%_center] sm:object-center"
+        className="absolute inset-0 w-full h-full object-cover object-[65%_center] sm:object-[60%_center]"
         autoPlay
         muted
         loop

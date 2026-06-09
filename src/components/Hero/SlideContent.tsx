@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import TransitionLink from '@/components/TransitionLink'
 
 interface SlideData {
-  eyebrow: string
   title: string
   description: string
   buttonText: string
@@ -20,37 +19,34 @@ interface SlideContentProps {
 
 // Hoisted outside component — static data, no need to recreate each render
 const containerVariants = {
-  hidden: { opacity: 0, x: 80, filter: 'blur(8px)' },
+  hidden: { opacity: 0, x: 36, filter: 'blur(8px)' },
   visible: { opacity: 1, x: 0, filter: 'blur(0px)' },
-  exit: { opacity: 0, x: -80, filter: 'blur(8px)' }
+  exit: { opacity: 0, x: -36, filter: 'blur(8px)' }
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, x: 50, filter: 'blur(4px)' },
+  hidden: { opacity: 0, x: 24, filter: 'blur(4px)' },
   visible: { opacity: 1, x: 0, filter: 'blur(0px)' },
-  exit: { opacity: 0, x: -50, filter: 'blur(4px)' }
+  exit: { opacity: 0, x: -24, filter: 'blur(4px)' }
 }
 
 const buttonVariants = {
-  hidden: { opacity: 0, x: 50, scale: 0.95, filter: 'blur(4px)' },
+  hidden: { opacity: 0, x: 24, scale: 0.95, filter: 'blur(4px)' },
   visible: { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' },
-  exit: { opacity: 0, x: -50, scale: 0.95, filter: 'blur(4px)' }
+  exit: { opacity: 0, x: -24, scale: 0.95, filter: 'blur(4px)' }
 }
 
-const eyebrowClass =
-  'flex items-center gap-3 mb-3 text-accent font-heading font-semibold uppercase tracking-[0.2em] text-[12px] md:text-[13px] drop-shadow lg:justify-end'
-
 const titleClass =
-  'font-heading font-bold uppercase text-white drop-shadow-2xl text-left lg:text-right text-[30px] leading-[1.15] sm:text-[32px] sm:leading-tight md:text-[38px] lg:text-[44px] xl:text-[52px]'
+  'font-heading font-bold uppercase text-white drop-shadow-2xl text-left lg:text-right text-balance break-words hyphens-none text-[clamp(26px,7vw,30px)] leading-[1.15] sm:text-[32px] sm:leading-tight md:text-[38px] lg:text-[44px] xl:text-[50px]'
 
 const descClass =
-  'mt-4 lg:mt-5 font-body text-white drop-shadow-lg text-left lg:text-right max-w-full text-[15px] leading-relaxed sm:text-[15px] sm:leading-relaxed md:text-[16px] lg:text-[17px]'
+  'mt-4 lg:mt-5 font-body text-white drop-shadow-lg text-left lg:text-right text-pretty max-w-full text-[15px] leading-relaxed sm:text-[15px] sm:leading-relaxed md:text-[16px] lg:text-[17px]'
 
 const btnWrapClass =
   'mt-7 sm:mt-5 lg:mt-6 flex justify-start lg:justify-end'
 
 const btnClass =
-  'w-full sm:w-auto max-w-[340px] px-8 py-4 bg-secondary text-white uppercase tracking-wide text-[13px] md:text-[14px] font-semibold shadow-xl hover:bg-white hover:text-black border-2 border-secondary hover:border-black transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-sm min-h-[54px] min-w-[140px] flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
+  'w-full sm:w-auto max-w-[340px] px-6 py-2.5 bg-secondary text-white uppercase tracking-wide text-[13px] md:text-[14px] font-semibold shadow-xl hover:bg-white hover:text-black border-2 border-secondary hover:border-black transition-all duration-300 transform hover:scale-105 hover:shadow-2xl rounded-sm min-h-[44px] min-w-[140px] flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
 
 // No-op subscription: el valor de hidratación nunca cambia tras montar
 const emptySubscribe = () => () => {}
@@ -81,15 +77,6 @@ export const SlideContent = ({ slide, isActive, className = '' }: SlideContentPr
             delayChildren: 0.08
           }}
         >
-          <motion.div
-            className={eyebrowClass}
-            variants={itemVariants}
-            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <span className="h-px w-8 bg-accent sm:w-10" aria-hidden="true" />
-            <span>{slide.eyebrow}</span>
-          </motion.div>
-
           <motion.h1
             className={titleClass}
             variants={itemVariants}

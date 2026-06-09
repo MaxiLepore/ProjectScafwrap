@@ -108,24 +108,10 @@
   filter: drop-shadow(0 -4px 12px rgba(34, 211, 238, 0.4));
 }
 
-/* Video responsive positioning */
-@media (max-width: 640px) {
-  video {
-    object-position: center center;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  video {
-    object-position: center center;
-  }
-}
-
-@media (min-width: 1025px) {
-  video {
-    object-position: right center;
-  }
-}
+/* El encuadre del video (object-position) se controla por elemento con las
+   clases de Tailwind en BackgroundVideo.tsx. No definir reglas `video {}`
+   globales acá: al estar fuera de @layer le ganan a las utilidades de
+   Tailwind y pisan el object-position del componente. */
 
 /* ── Mate Studio badge ────────────────────────────────────────── */
 .ms-badge {
