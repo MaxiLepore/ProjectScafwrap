@@ -180,13 +180,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Mobile:</p>
-                    <p className="text-gray-700">021 774 534 (Chris)</p>
                     <p className="text-gray-700">027 223 9727 (Kris)</p>
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email:</p>
-                    <a href="mailto:chris@scaf-wrap.co.nz" className="text-accent hover:underline">
-                      chris@scaf-wrap.co.nz
+                    <a href="mailto:kris@scaf-wrap.co.nz" className="text-accent hover:underline">
+                      kris@scaf-wrap.co.nz
                     </a>
                   </div>
                 </div>

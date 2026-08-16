@@ -73,16 +73,16 @@ export const Footer = () => {
             </h3>
             <div className="text-sm space-y-2 mt-6">
               <div>
-                <span className="font-semibold">MOBILE:</span> 021 774 534
-                (CHRIS) 027 223 9727 (KRIS)
+                <span className="font-semibold">MOBILE:</span> 027 223 9727
+                (KRIS)
               </div>
               <div>
                 <span className="font-semibold">EMAIL:</span>{" "}
                 <a
-                  href="mailto:chris@scaf-wrap.co.nz"
+                  href="mailto:kris@scaf-wrap.co.nz"
                   className="text-accent hover:underline"
                 >
-                  CHRIS@SCAF-WRAP.CO.NZ
+                  KRIS@SCAF-WRAP.CO.NZ
                 </a>
               </div>
             </div>
